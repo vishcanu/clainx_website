@@ -1,0 +1,75 @@
+---
+import { features } from '../../data/features';
+import icons from '../../lib/icons';
+---
+
+<section class="relative py-24 lg:py-32 overflow-hidden">
+  <div class="absolute inset-0 dark:bg-dark-950 bg-light-50"></div>
+  <div class="absolute inset-0 grid-overlay opacity-30"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-neon-blue/4 rounded-full blur-[150px]"></div>
+
+  <div class="relative section-padding">
+    <div class="section-container">
+      
+      <!-- Header -->
+      <div class="text-center mb-20 reveal">
+        <span class="badge-blue mb-4">Features</span>
+        <h2 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl dark:text-white text-dark-950 mt-4 mb-6">
+          Built for Champions.<br/>
+          <span class="gradient-text">Designed for Everyone.</span>
+        </h2>
+        <p class="dark:text-white/50 text-dark-500 text-lg max-w-xl mx-auto">
+          Every feature is designed to make you move more, compete harder, and feel unstoppable.
+        </p>
+      </div>
+
+      <!-- Feature grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 stagger-children reveal">
+        {features.map((feature, i) => (
+          <div
+            class="card-glass group cursor-pointer relative overflow-hidden holographic"
+            style={`transition-delay: ${i * 0.08}s;`}
+          >
+            <!-- Hover glow -->
+            <div
+              class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"
+              style={`background: radial-gradient(circle at top left, ${feature.color}15, transparent 60%);`}
+            ></div>
+
+            <div class="relative z-10">
+              <!-- Icon container -->
+              <div
+                class="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110"
+                style={`background: ${feature.color}15; color: ${feature.color};`}
+              >
+                <span class="w-6 h-6" set:html={icons[feature.icon as keyof typeof icons] ?? icons.map}></span>
+              </div>
+
+              <!-- Tag -->
+              <span
+                class="inline-block text-[10px] font-bold tracking-widest px-2 py-0.5 rounded-full mb-3"
+                style={`background: ${feature.color}12; color: ${feature.color};`}
+              >
+                {feature.tag}
+              </span>
+
+              <h3 class="font-display font-bold text-lg dark:text-white text-dark-900 mb-2 leading-tight">
+                {feature.title}
+              </h3>
+              <p class="text-sm dark:text-white/50 text-dark-500 leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- View all features link -->
+      <div class="text-center mt-12 reveal">
+        <a href="/features" class="btn-secondary text-base px-8 py-3.5">
+          Explore All Features →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

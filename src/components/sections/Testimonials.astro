@@ -1,0 +1,62 @@
+﻿---
+import icons from '../../lib/icons';
+
+const perks = [
+  { iconKey: 'mapPin', color: '#00D4FF', text: 'Exclusive beta territory badge' },
+  { iconKey: 'crown', color: '#8B5CF6', text: 'Founder rank in the Arena' },
+  { iconKey: 'gift', color: '#AAFF00', text: 'First access to Neighbourhood Offers' },
+  { iconKey: 'zap', color: '#FF6B00', text: 'Early siege powers unlocked' },
+];
+---
+
+<section class="relative py-24 lg:py-32 overflow-hidden">
+  <div class="absolute inset-0 dark:bg-dark-900 bg-light-100"></div>
+  <div class="absolute inset-0 grid-overlay opacity-20"></div>
+  <div class="absolute top-1/2 right-0 w-[600px] h-[400px] bg-neon-purple/5 rounded-full blur-[120px] -translate-y-1/2"></div>
+
+  <div class="relative section-padding">
+    <div class="section-container">
+      <div class="max-w-3xl mx-auto text-center reveal">
+
+        <!-- Badge -->
+        <span class="badge-purple mb-6 inline-block">Beta Access</span>
+
+        <!-- Headline -->
+        <h2 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl dark:text-white text-dark-950 mb-6 leading-tight">
+          Be the First to<br/>
+          <span class="gradient-text">Claim Your City.</span>
+        </h2>
+
+        <p class="dark:text-white/60 text-dark-500 text-lg max-w-xl mx-auto mb-12">
+          ClaimX launches on Android in June 2026. Join the waitlist now and get
+          founder-tier perks when the map goes live.
+        </p>
+
+        <!-- Perks grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12 text-left">
+          {perks.map((perk) => (
+            <div class="card-glass flex items-center gap-4">
+              <div
+                class="w-10 h-10 rounded-xl flex items-center justify-center flex-none"
+                style={`background: ${perk.color}15; color: ${perk.color};`}
+              >
+                <span class="w-5 h-5" set:html={icons[perk.iconKey as keyof typeof icons]}></span>
+              </div>
+              <span class="dark:text-white/80 text-dark-700 text-sm font-medium">{perk.text}</span>
+            </div>
+          ))}
+        </div>
+
+        <!-- CTA -->
+        <a href="/download#waitlist" class="btn-primary text-base px-10 py-4 gap-3 inline-flex">
+          <span class="w-5 h-5 flex-none" set:html={icons.android}></span>
+          Join the Waitlist
+        </a>
+
+        <p class="mt-4 text-xs dark:text-white/30 text-dark-400">
+          Android beta Â· June 2026 Â· No credit card required
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/navigation/Navbar.astro';
+import Footer from '../components/navigation/Footer.astro';
+import icons from '../lib/icons';
+
+const timeline = [
+  {
+    date: 'March 2026',
+    title: 'The Idea',
+    content: 'Frustrated with boring fitness apps, we asked: what if your city was the game board? The idea for ClaimX sparked — real streets, real movement, real conquest.',
+    iconKey: 'target',
+    color: '#00D4FF',
+  },
+  {
+    date: 'April 2026',
+    title: 'First Prototype',
+    content: 'Built a GPS tracker that drew colored zones on a real map. We tested it by running every street in our neighbourhood. We were immediately hooked.',
+    iconKey: 'run',
+    color: '#AAFF00',
+  },
+  {
+    date: 'May 2026',
+    title: 'Multiplayer & Siege System',
+    content: 'Added rival players, territory battles, and the siege warfare system. Within days, testers were waking at 5am to defend their zones. The addiction was real.',
+    iconKey: 'swords',
+    color: '#FF6B00',
+  },
+  {
+    date: 'June 2026',
+    title: 'ClaimX Beta — Launching Now',
+    content: 'IMPRINT tiers, Arena rankings, Neighbourhood Offers, and the full siege system. Beta launching on Android. Join the waitlist and claim your city from day one.',
+    iconKey: 'zap',
+    color: '#8B5CF6',
+  },
+];
+
+const values = [
+  { iconKey: 'target', color: '#00D4FF', title: 'Fitness Should Be Fun', desc: "If it feels like a chore, it won't stick. ClaimX makes movement feel like the most exciting thing you'll do today." },
+  { iconKey: 'trophy', color: '#F59E0B', title: 'Real Achievement Only', desc: 'Every tier, every power, every advantage — earned through real physical effort. No shortcuts. No pay-to-win.' },
+  { iconKey: 'map', color: '#AAFF00', title: 'City as a Canvas', desc: 'Your city is alive. Every park, street, and corridor is a strategic asset. ClaimX reveals the game hidden in plain sight.' },
+  { iconKey: 'heart', color: '#FF0080', title: 'Health First', desc: 'We measure success by how much healthier our players are, not just how much time they spend in the app.' },
+];
+---
+
+<BaseLayout
+  title="About"
+  description="ClaimX was born from a simple idea: fitness apps fail because they're boring. We built a fitness game powered by the real world."
+>
+  <Navbar />
+  <main>
+    <!-- Hero -->
+    <section class="relative min-h-[60vh] flex items-center py-24 overflow-hidden">
+      <div class="absolute inset-0 dark:bg-dark-950 bg-light-50"></div>
+      <div class="absolute inset-0 grid-overlay opacity-30"></div>
+      <div class="absolute top-1/2 right-1/4 w-[600px] h-[400px] bg-neon-purple/6 rounded-full blur-[120px] -translate-y-1/2"></div>
+
+      <div class="relative section-padding w-full">
+        <div class="section-container max-w-4xl">
+          <span class="badge-purple mb-6 inline-block">Our Story</span>
+          <h1 class="font-display font-black text-5xl sm:text-6xl lg:text-7xl xl:text-8xl dark:text-white text-dark-950 mb-8 leading-none tracking-tighter">
+            Fitness Apps<br/>
+            <span class="gradient-text">Were Broken.</span><br/>
+            We Fixed Them.
+          </h1>
+          <p class="dark:text-white/60 text-dark-500 text-xl leading-relaxed max-w-2xl">
+            ClaimX was born from a simple insight: the reason people quit fitness apps is because they're boring. 
+            Not because fitness is boring — but because the apps make it feel that way. We believed there was a better way.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission statement -->
+    <section class="relative py-20 dark:bg-dark-900 bg-light-100 overflow-hidden">
+      <div class="absolute inset-0 grid-overlay opacity-20"></div>
+      <div class="section-padding">
+        <div class="section-container max-w-5xl mx-auto text-center">
+          <blockquote class="font-display font-black text-3xl sm:text-4xl lg:text-5xl dark:text-white text-dark-950 leading-tight reveal">
+            "We don't want to track your steps.<br/>
+            <span class="gradient-text">We want to change your city."</span>
+          </blockquote>
+          <p class="dark:text-white/40 text-dark-400 mt-6 text-lg">— ClaimX Founding Team</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="relative py-24 lg:py-32 overflow-hidden">
+      <div class="absolute inset-0 dark:bg-dark-950 bg-light-50"></div>
+      <div class="absolute inset-0 grid-overlay opacity-20"></div>
+
+      <div class="section-padding">
+        <div class="section-container max-w-4xl mx-auto">
+          <div class="text-center mb-20 reveal">
+            <span class="badge-blue mb-4">Timeline</span>
+            <h2 class="font-display font-black text-4xl sm:text-5xl dark:text-white text-dark-950 mt-4">
+              How We Got Here
+            </h2>
+          </div>
+
+          <!-- Timeline items -->
+          <div class="relative">
+            <!-- Vertical line -->
+            <div class="absolute left-6 sm:left-1/2 top-0 bottom-0 w-px dark:bg-neon-blue/20 bg-neon-blue/15 -translate-x-1/2"></div>
+
+            <div class="space-y-12">
+              {timeline.map((item, i) => (
+                <div class={`relative reveal grid grid-cols-1 sm:grid-cols-2 gap-8 ${i % 2 === 1 ? 'sm:direction-rtl' : ''}`}>
+                  <!-- Year node -->
+                  <div class={`flex ${i % 2 === 1 ? 'sm:justify-end' : 'sm:justify-end'} items-start`}>
+                    <div class={`sm:pr-8 ${i % 2 === 1 ? 'sm:order-2 sm:pl-8 sm:pr-0' : ''}`}>
+                      <div class="glass rounded-2xl p-6 max-w-sm" style={`border-color: ${item.color}20;`}>
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style={`background: ${item.color}15; color: ${item.color};`}>
+                          <span class="w-5 h-5" set:html={icons[item.iconKey as keyof typeof icons]}></span>
+                        </div>
+                        <div class="font-mono text-sm mb-2" style={`color: ${item.color};`}>{item.date}</div>
+                        <h3 class="font-display font-bold text-xl dark:text-white text-dark-950 mb-3">{item.title}</h3>
+                        <p class="dark:text-white/60 text-dark-500 text-sm leading-relaxed">{item.content}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Node dot -->
+                  <div class="hidden sm:flex absolute left-1/2 -translate-x-1/2 top-8 w-4 h-4 rounded-full bg-neon-blue shadow-neon-blue border-2 border-dark-950 z-10 items-center justify-center">
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Values -->
+    <section class="relative py-24 overflow-hidden dark:bg-dark-900 bg-light-100">
+      <div class="absolute inset-0 grid-overlay opacity-20"></div>
+      <div class="section-padding">
+        <div class="section-container">
+          <div class="text-center mb-16 reveal">
+            <span class="badge-blue mb-4">Philosophy</span>
+            <h2 class="font-display font-black text-4xl sm:text-5xl dark:text-white text-dark-950 mt-4">
+              What We Believe
+            </h2>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 stagger-children reveal">
+            {values.map((v) => (
+              <div class="card-glass text-center group">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" style={`background: ${v.color}15; color: ${v.color};`}>
+                  <span class="w-6 h-6" set:html={icons[v.iconKey as keyof typeof icons]}></span>
+                </div>
+                <h3 class="font-display font-bold text-lg dark:text-white text-dark-950 mb-3">{v.title}</h3>
+                <p class="dark:text-white/50 text-dark-500 text-sm leading-relaxed">{v.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="relative py-20 overflow-hidden dark:bg-dark-900 bg-light-100">
+      <div class="section-padding">
+        <div class="section-container text-center">
+          <h2 class="font-display font-black text-4xl sm:text-5xl dark:text-white text-dark-950 mb-6 reveal">
+            Join the Movement
+          </h2>
+          <p class="dark:text-white/60 text-dark-500 text-lg mb-8 max-w-xl mx-auto reveal">
+            Whether you walk 2km or run 20km, there's a place in the ClaimX world for you.
+          </p>
+          <div class="flex flex-wrap gap-4 justify-center reveal">
+            <a href="/download" class="btn-primary text-base px-8 py-4">Download App</a>
+            <a href="/download#waitlist" class="btn-secondary text-base px-8 py-4">Join Waitlist</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

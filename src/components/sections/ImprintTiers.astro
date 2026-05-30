@@ -1,0 +1,189 @@
+﻿---
+import { tiers } from '../../data/tiers';
+import { Navigation, Flame, Zap, Crown, Trophy, Star, Check, MapPin } from 'lucide-react';
+import type { ComponentType } from 'react';
+
+const iconMap: Record<string, ComponentType<any>> = {
+  navigation: Navigation,
+  flame:      Flame,
+  zap:        Zap,
+  crown:      Crown,
+  trophy:     Trophy,
+  mapPin:     MapPin,
+};
+---
+
+<section class="relative py-24 lg:py-32 overflow-hidden">
+  <div class="absolute inset-0 dark:bg-dark-900 bg-light-100"></div>
+  <div class="absolute inset-0 grid-overlay opacity-20"></div>
+  <div class="absolute top-0 left-1/4 w-[600px] h-[400px] bg-neon-purple/5 rounded-full blur-[120px]"></div>
+  <div class="absolute bottom-0 right-1/4 w-[600px] h-[400px] bg-neon-orange/5 rounded-full blur-[120px]"></div>
+
+  <div class="relative section-padding">
+    <div class="section-container">
+
+      <!-- Header -->
+      <div class="text-center mb-20 reveal">
+        <span class="badge-purple mb-4">IMPRINT System</span>
+        <h2 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl dark:text-white text-dark-950 mt-4 mb-6">
+          Your Tier.<br/>
+          <span class="gradient-text">Your Reputation.</span>
+        </h2>
+        <p class="dark:text-white/50 text-dark-500 text-lg max-w-xl mx-auto">
+          Five tiers of conquest. Each one harder to reach. Each one more legendary.
+        </p>
+      </div>
+
+      <!-- Tier buildings showcase -->
+      <div class="flex items-end justify-center gap-3 sm:gap-6 mb-16 reveal" style="height: 320px;">
+        {tiers.map((tier, i) => {
+          const TierIcon = iconMap[tier.icon] ?? Navigation;
+          const heightPct = (tier.height / 5) * 100;
+          const buildingH = heightPct + 80;
+          const wrapH = heightPct + 120;
+          return (
+            <div
+              class="flex flex-col items-center gap-3 group cursor-pointer"
+              style={{ transitionDelay: `${i * 0.1}s` }}
+            >
+              <div
+                class="relative flex flex-col items-center justify-end"
+                style={{ height: `${wrapH}px`, width: '60px' }}
+              >
+                {i >= 3 && (
+                  <div
+                    class="absolute -top-9 animate-float flex items-center justify-center"
+                    style={{ animationDelay: `${i * 0.3}s`, color: tier.color }}
+                  >
+                    {i === 4 ? <Crown class="w-6 h-6" /> : <Star class="w-5 h-5" />}
+                  </div>
+                )}
+
+                <div
+                  class="w-full relative rounded-t-lg overflow-hidden transition-all duration-500 group-hover:scale-105"
+                  style={{
+                    height: `${buildingH}px`,
+                    background: `linear-gradient(to top, ${tier.color}30, ${tier.color}15)`,
+                    border: `1px solid ${tier.color}40`,
+                    boxShadow: `0 0 30px ${tier.glowColor}, inset 0 1px 0 ${tier.color}30`,
+                  }}
+                >
+                  <div class="absolute inset-0 p-2">
+                    <div class="grid grid-cols-3 gap-1 h-full">
+                      {Array.from({ length: 12 }).map((_, wi) => (
+                        <div
+                          key={wi}
+                          class="rounded-sm"
+                          style={{ background: `${tier.color}${wi % 3 === 0 ? '60' : '18'}` }}
+                        ></div>
+                      ))}
+                    </div>
+                  </div>
+                  <div class="absolute top-0 left-0 right-0 h-px" style={{ background: tier.color }}></div>
+                  <div class="absolute bottom-2 left-0 right-0 flex justify-center">
+                    <span class="text-[8px] font-black tracking-widest" style={{ color: tier.color }}>
+                      {tier.name}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-center flex flex-col items-center gap-1">
+                <div class="flex items-center justify-center" style={{ color: tier.color }}>
+                  <TierIcon class="w-4 h-4" />
+                </div>
+                <div class="text-[10px] font-bold tracking-widest" style={{ color: tier.color }}>
+                  {tier.name}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <!-- Tier cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-stretch stagger-children reveal">
+        {tiers.map((tier) => {
+          const TierIcon = iconMap[tier.icon] ?? Navigation;
+          const dimGlow = tier.glowColor.replace(/[\d.]+\)$/, '0.1)');
+          return (
+            <div
+              class="group relative rounded-2xl overflow-hidden border cursor-pointer transition-all duration-500 hover:-translate-y-1 flex flex-col h-full"
+              style={{
+                background: 'rgba(255,255,255,0.02)',
+                borderColor: `${tier.color}25`,
+                backdropFilter: 'blur(12px)',
+              }}
+            >
+              <!-- Top accent bar -->
+              <div
+                class="absolute top-0 left-0 right-0 h-[2px]"
+                style={{ background: `linear-gradient(90deg, transparent, ${tier.color}, transparent)` }}
+              ></div>
+
+              <!-- Hover glow -->
+              <div
+                class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{ background: `radial-gradient(ellipse at top, ${dimGlow}, transparent 70%)` }}
+              ></div>
+
+              <!-- Card body: flex-1 so it fills the card height -->
+              <div class="relative p-6 flex flex-col flex-1">
+
+                <!-- Icon + tier badge -->
+                <div class="flex items-center justify-between mb-4">
+                  <div
+                    class="w-10 h-10 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+                    style={{
+                      background: `${tier.color}15`,
+                      border: `1px solid ${tier.color}30`,
+                      color: tier.color,
+                    }}
+                  >
+                    <TierIcon class="w-5 h-5" />
+                  </div>
+                  <span
+                    class="text-[10px] font-black tracking-widest px-2.5 py-1 rounded-full"
+                    style={{
+                      color: tier.color,
+                      background: `${tier.color}15`,
+                      border: `1px solid ${tier.color}25`,
+                    }}
+                  >{tier.name}</span>
+                </div>
+
+                <!-- Description: flex-1 absorbs varying text height -->
+                <p class="text-xs dark:text-white/60 text-dark-500 leading-relaxed flex-1 mb-4">
+                  {tier.description}
+                </p>
+
+                <!-- Requirements — always at same vertical position -->
+                <div
+                  class="text-[10px] font-mono px-2.5 py-1.5 rounded-lg leading-snug mb-4"
+                  style={{
+                    color: tier.color,
+                    background: `${tier.color}10`,
+                    border: `1px solid ${tier.color}20`,
+                  }}
+                >
+                  {tier.requirements}
+                </div>
+
+                <!-- Perks — pinned to bottom -->
+                <ul class="space-y-2">
+                  {tier.perks.slice(0, 3).map((perk) => (
+                    <li class="flex items-start gap-2 text-[11px] dark:text-white/55 text-dark-500">
+                      <Check class="w-3.5 h-3.5 mt-0.5 flex-none" style={{ color: tier.color }} />
+                      <span>{perk}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+    </div>
+  </div>
+</section>

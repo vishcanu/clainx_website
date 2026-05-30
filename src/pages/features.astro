@@ -1,0 +1,296 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/navigation/Navbar.astro';
+import Footer from '../components/navigation/Footer.astro';
+import { features } from '../data/features';
+import { tiers } from '../data/tiers';
+import { sieges } from '../data/sieges';
+
+const sections = [
+  { id: 'territory', label: 'Territory' },
+  { id: 'building', label: 'Buildings' },
+  { id: 'imprint', label: 'IMPRINT' },
+  { id: 'siege', label: 'Siege' },
+  { id: 'arena', label: 'Arena' },
+  { id: 'health', label: 'Health' },
+];
+
+const arenaFeatures = [
+  { icon: '🏆', title: 'Season Rankings', desc: 'Weekly and monthly leaderboards across your city, region, and globally.' },
+  { icon: '⚔️', title: 'Rival System', desc: 'Automatically matched with rivals at your tier for persistent territory wars.' },
+  { icon: '🤝', title: 'Alliance Battles', desc: 'Team up with up to 5 players for coordinated district conquest.' },
+  { icon: '🎯', title: 'Daily Missions', desc: 'Fresh objectives every day: capture zones, run routes, reach steps goals.' },
+  { icon: '💰', title: 'Prize Pools', desc: 'Seasonal tournaments with real rewards for top arena performers.' },
+  { icon: '👻', title: 'Ghost Challenges', desc: 'Race your past performance as a ghost overlay on the live map.' },
+];
+---
+
+<BaseLayout
+  title="Features"
+  description="Deep-dive into every ClaimX system. Territory claiming, 3D buildings, IMPRINT tiers, siege warfare, arena rankings, and health tracking."
+>
+  <Navbar />
+  <main>
+    <!-- Hero -->
+    <section class="relative py-24 lg:py-32 overflow-hidden">
+      <div class="absolute inset-0 dark:bg-dark-950 bg-light-50"></div>
+      <div class="absolute inset-0 grid-overlay opacity-30"></div>
+      <div class="absolute top-1/2 left-1/4 w-[600px] h-[400px] bg-neon-blue/6 rounded-full blur-[120px] -translate-y-1/2"></div>
+
+      <div class="relative section-padding">
+        <div class="section-container text-center max-w-4xl mx-auto">
+          <span class="badge-blue mb-6 inline-block">Everything ClaimX</span>
+          <h1 class="font-display font-black text-5xl sm:text-6xl lg:text-7xl dark:text-white text-dark-950 mb-8 leading-none tracking-tighter">
+            Every Feature.<br/>
+            <span class="gradient-text">Maximum Depth.</span>
+          </h1>
+          <p class="dark:text-white/60 text-dark-500 text-xl max-w-2xl mx-auto leading-relaxed">
+            ClaimX is built around six interconnected systems that turn everyday movement into an epic real-world game.
+          </p>
+
+          <!-- Section nav pills -->
+          <div class="flex flex-wrap gap-2 justify-center mt-10">
+            {sections.map((s) => (
+              <a
+                href={`#${s.id}`}
+                class="px-4 py-2 glass rounded-full text-sm font-semibold dark:text-white/70 text-dark-500 hover:text-neon-blue hover:border-neon-blue/30 transition-all duration-300"
+              >
+                {s.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Territory System -->
+    <section id="territory" class="relative py-20 lg:py-28 overflow-hidden dark:bg-dark-900 bg-light-100">
+      <div class="absolute inset-0 grid-overlay opacity-20"></div>
+      <div class="section-padding">
+        <div class="section-container">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="reveal-left">
+              <span class="badge-blue mb-4 inline-block">Territory System</span>
+              <h2 class="font-display font-black text-4xl sm:text-5xl dark:text-white text-dark-950 mt-4 mb-6 leading-tight">
+                The Map Is<br/><span class="gradient-text">The Game Board.</span>
+              </h2>
+              <p class="dark:text-white/60 text-dark-500 leading-relaxed mb-6">
+                Your city is divided into a hexagonal grid. Every hex can be owned. When you physically move through a hex — on foot or bike — it becomes yours. It's that simple, and that deep.
+              </p>
+              <ul class="space-y-3">
+                {['GPS-based real-time claiming', 'Hexagonal zone grid overlay', 'Color-coded player territories', 'Multi-player overlap rules', 'Distance-weighted claim power', 'Offline sync support'].map((item) => (
+                  <li class="flex items-center gap-3 text-sm dark:text-white/70 text-dark-600">
+                    <div class="w-1.5 h-1.5 rounded-full bg-neon-blue flex-none"></div>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="reveal-right">
+              <!-- Hex grid diagram -->
+              <div class="glass rounded-3xl p-6 relative overflow-hidden">
+                <svg viewBox="0 0 400 350" class="w-full h-full" fill="none">
+                  <!-- Hexagonal grid visualization -->
+                  {[
+                    { cx: 70, cy: 80, owned: true, player: true },
+                    { cx: 130, cy: 80, owned: true, player: true },
+                    { cx: 190, cy: 80, owned: false },
+                    { cx: 250, cy: 80, owned: true, rival: true },
+                    { cx: 310, cy: 80, owned: true, rival: true },
+                    { cx: 100, cy: 135, owned: true, player: true },
+                    { cx: 160, cy: 135, owned: true, player: true },
+                    { cx: 220, cy: 135, owned: true, rival: true },
+                    { cx: 280, cy: 135, owned: false },
+                    { cx: 70, cy: 190, owned: true, player: true },
+                    { cx: 130, cy: 190, owned: true, player: true },
+                    { cx: 190, cy: 190, owned: false },
+                    { cx: 250, cy: 190, owned: true, rival: true },
+                    { cx: 100, cy: 245, owned: false },
+                    { cx: 160, cy: 245, owned: true, player: true },
+                    { cx: 220, cy: 245, owned: false },
+                    { cx: 280, cy: 245, owned: true, rival: true },
+                  ].map((hex, i) => {
+                    const size = 35;
+                    const points = Array.from({ length: 6 }, (_, j) => {
+                      const angle = (Math.PI / 3) * j - Math.PI / 6;
+                      return `${hex.cx + size * Math.cos(angle)},${hex.cy + size * Math.sin(angle)}`;
+                    }).join(' ');
+                    const fill = hex.player ? 'rgba(0,212,255,0.25)' : hex.rival ? 'rgba(255,107,0,0.25)' : 'rgba(255,255,255,0.03)';
+                    const stroke = hex.player ? '#00D4FF' : hex.rival ? '#FF6B00' : 'rgba(255,255,255,0.1)';
+                    return (
+                      <polygon
+                        key={i}
+                        points={points}
+                        fill={fill}
+                        stroke={stroke}
+                        stroke-width="1"
+                      />
+                    );
+                  })}
+
+                  <!-- GPS path -->
+                  <path d="M70 80 L130 80 L160 135 L130 190 L160 245" stroke="#00D4FF" stroke-width="2" stroke-dasharray="5 3" opacity="0.7">
+                    <animate attributeName="stroke-dashoffset" values="0;-80" dur="2s" repeatCount="indefinite"/>
+                  </path>
+
+                  <!-- Runner dot -->
+                  <circle cx="160" cy="245" r="5" fill="#00D4FF">
+                    <animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite"/>
+                  </circle>
+                  <circle cx="160" cy="245" r="12" fill="rgba(0,212,255,0.2)">
+                    <animate attributeName="r" values="8;16;8" dur="1.5s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values="0.4;0;0.4" dur="1.5s" repeatCount="indefinite"/>
+                  </circle>
+
+                  <!-- Legend -->
+                  <rect x="10" y="300" width="12" height="12" rx="2" fill="rgba(0,212,255,0.3)" stroke="#00D4FF" stroke-width="1"/>
+                  <text x="27" y="311" fill="rgba(255,255,255,0.5)" font-size="11">Your Territory</text>
+                  <rect x="150" y="300" width="12" height="12" rx="2" fill="rgba(255,107,0,0.3)" stroke="#FF6B00" stroke-width="1"/>
+                  <text x="167" y="311" fill="rgba(255,255,255,0.5)" font-size="11">Rival Territory</text>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Building System (3D) -->
+    <section id="building" class="relative py-20 lg:py-28 overflow-hidden dark:bg-dark-950 bg-light-50">
+      <div class="absolute inset-0 grid-overlay opacity-30"></div>
+      <div class="section-padding">
+        <div class="section-container">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <!-- 3D building visual -->
+            <div class="reveal-left order-2 lg:order-1">
+              <div class="glass rounded-3xl p-8 flex items-end justify-center gap-4" style="height: 320px;">
+                {[
+                  { h: 60, color: '#94A3B8', label: 'LOWKEY' },
+                  { h: 100, color: '#22D3EE', label: 'COOKING' },
+                  { h: 150, color: '#8B5CF6', label: 'SLAPS' },
+                  { h: 200, color: '#F59E0B', label: 'GOATED' },
+                  { h: 250, color: '#FF6B00', label: 'CERTIFIED' },
+                ].map((b, i) => (
+                  <div key={i} class="flex flex-col items-center gap-2 group cursor-pointer">
+                    <div
+                      class="w-12 rounded-t-lg relative overflow-hidden transition-all duration-500 group-hover:scale-105"
+                      style={`
+                        height: ${b.h}px;
+                        background: linear-gradient(to top, ${b.color}50, ${b.color}25);
+                        border: 1px solid ${b.color}60;
+                        box-shadow: 0 0 20px ${b.color}40;
+                      `}
+                    >
+                      <div class="absolute top-0 left-0 right-0 h-px" style={`background: ${b.color};`}></div>
+                      <div class="grid grid-cols-2 gap-0.5 p-1 h-full">
+                        {Array.from({ length: 8 }).map((_, wi) => (
+                          <div
+                            key={wi}
+                            class="rounded-sm opacity-60"
+                            style={`background: ${b.color}; animation: glowPulse ${1 + Math.random()}s ease-in-out infinite; animation-delay: ${Math.random() * 2}s;`}
+                          ></div>
+                        ))}
+                      </div>
+                    </div>
+                    <span class="text-[8px] font-black tracking-widest" style={`color: ${b.color};`}>{b.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div class="reveal-right order-1 lg:order-2">
+              <span class="badge-purple mb-4 inline-block">3D Building System</span>
+              <h2 class="font-display font-black text-4xl sm:text-5xl dark:text-white text-dark-950 mt-4 mb-6 leading-tight">
+                Your Territory<br/><span class="gradient-text">Grows Upward.</span>
+              </h2>
+              <p class="dark:text-white/60 text-dark-500 leading-relaxed mb-6">
+                The longer you hold a territory, the taller the 3D tower that grows from it. Your building height is your legacy — visible to every rival who passes through.
+              </p>
+              <ul class="space-y-3">
+                {['5-tier height progression', 'Real-time 3D rendering on map', 'Crowns at GOATED+ tier', 'Building resets on zone loss', 'District landmark status at max height', 'Visual territory war indicator'].map((item) => (
+                  <li class="flex items-center gap-3 text-sm dark:text-white/70 text-dark-600">
+                    <div class="w-1.5 h-1.5 rounded-full bg-neon-purple flex-none"></div>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Arena Features -->
+    <section id="arena" class="relative py-20 lg:py-28 overflow-hidden dark:bg-dark-900 bg-light-100">
+      <div class="absolute inset-0 grid-overlay opacity-20"></div>
+      <div class="section-padding">
+        <div class="section-container">
+          <div class="text-center mb-16 reveal">
+            <span class="badge-orange mb-4">Arena System</span>
+            <h2 class="font-display font-black text-4xl sm:text-5xl dark:text-white text-dark-950 mt-4">
+              Compete.<br/><span class="gradient-text-fire">Dominate. Win.</span>
+            </h2>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 stagger-children reveal">
+            {arenaFeatures.map((f, i) => (
+              <div class="card-glass group" style={`transition-delay: ${i * 0.1}s;`}>
+                <div class="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">{f.icon}</div>
+                <h3 class="font-display font-bold text-lg dark:text-white text-dark-950 mb-2">{f.title}</h3>
+                <p class="dark:text-white/50 text-dark-500 text-sm leading-relaxed">{f.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature grid full -->
+    <section id="health" class="relative py-20 lg:py-28 overflow-hidden dark:bg-dark-950 bg-light-50">
+      <div class="absolute inset-0 grid-overlay opacity-30"></div>
+      <div class="section-padding">
+        <div class="section-container">
+          <div class="text-center mb-16 reveal">
+            <span class="badge-blue mb-4">All Features</span>
+            <h2 class="font-display font-black text-4xl sm:text-5xl dark:text-white text-dark-950 mt-4">
+              The Full Arsenal
+            </h2>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 stagger-children reveal">
+            {features.map((feature, i) => (
+              <div
+                class="card-glass group"
+                style={`transition-delay: ${i * 0.05}s; border-color: ${feature.color}15;`}
+              >
+                <div
+                  class="w-10 h-10 rounded-xl flex items-center justify-center mb-3 text-xl group-hover:scale-110 transition-transform duration-300"
+                  style={`background: ${feature.color}15;`}
+                >
+                  {feature.icon === 'Map' ? '🗺️' : feature.icon === 'Building2' ? '🏙️' : feature.icon === 'Swords' ? '⚔️' : feature.icon === 'Heart' ? '❤️' : feature.icon === 'Trees' ? '🌳' : feature.icon === 'Users' ? '👥' : feature.icon === 'Trophy' ? '🏆' : '👻'}
+                </div>
+                <span class="inline-block text-[10px] font-bold tracking-widest px-2 py-0.5 rounded-full mb-2" style={`background: ${feature.color}12; color: ${feature.color};`}>{feature.tag}</span>
+                <h3 class="font-display font-bold text-base dark:text-white text-dark-950 mb-2">{feature.title}</h3>
+                <p class="text-xs dark:text-white/50 text-dark-500 leading-relaxed">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="relative py-20 overflow-hidden dark:bg-dark-900 bg-light-100">
+      <div class="section-padding">
+        <div class="section-container text-center">
+          <h2 class="font-display font-black text-4xl sm:text-5xl dark:text-white text-dark-950 mb-6 reveal">
+            Ready to Claim?
+          </h2>
+          <div class="flex flex-wrap gap-4 justify-center reveal">
+            <a href="/download" class="btn-primary text-base px-8 py-4">Download App</a>
+            <a href="/arena" class="btn-secondary text-base px-8 py-4">View Arena →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

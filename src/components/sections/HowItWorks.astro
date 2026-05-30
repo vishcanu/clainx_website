@@ -1,0 +1,158 @@
+﻿---
+import { Footprints, MapPin, Swords, Rocket } from 'lucide-react';
+
+const steps = [
+  {
+    number: '01',
+    Icon: Footprints,
+    title: 'Walk, Run, or Cycle',
+    subtitle: 'Move your way.',
+    description: 'Every movement counts. Your GPS route is converted into territory-claiming power — walk, run, or cycle to own the map.',
+    color: '#AAFF00',
+    glow: 'rgba(170,255,0,0.25)',
+    details: ['GPS route tracking', 'Walk, run, or cycle', 'Auto activity detection', 'Indoor mode available'],
+  },
+  {
+    number: '02',
+    Icon: MapPin,
+    title: 'Claim the Map',
+    subtitle: 'Own the Map.',
+    description: 'As you move, hexagonal zones on the real city map fill with your color. The more you move, the more territory you own.',
+    color: '#00D4FF',
+    glow: 'rgba(0,212,255,0.25)',
+    details: ['Hex zone system', 'Real map data', 'Instant claiming', '3D tower growth'],
+  },
+  {
+    number: '03',
+    Icon: Swords,
+    title: 'Conquer',
+    subtitle: 'Dominate Your City.',
+    description: 'Defend your territory, launch siege attacks on rivals, and climb the Arena rankings to become the undisputed city ruler.',
+    color: '#FF6B00',
+    glow: 'rgba(255,107,0,0.25)',
+    details: ['Siege system', 'Arena rankings', 'Alliance wars', 'City domination'],
+  },
+];
+---
+
+<section class="relative py-24 lg:py-32 overflow-hidden">
+  <!-- Background -->
+  <div class="absolute inset-0 dark:bg-dark-950 bg-light-50"></div>
+  <div class="absolute inset-0 grid-overlay opacity-30"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-neon-blue/4 rounded-full blur-[100px]"></div>
+
+  <div class="relative section-padding">
+    <div class="section-container">
+
+      <!-- Header -->
+      <div class="text-center mb-20 reveal">
+        <span class="badge-blue mb-4">How It Works</span>
+        <h2 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl dark:text-white text-dark-950 mt-4 mb-6">
+          Three Steps to<br/>
+          <span class="gradient-text">City Domination</span>
+        </h2>
+        <p class="dark:text-white/50 text-dark-500 text-lg max-w-xl mx-auto">
+          Simple concept. Infinite depth. Your daily routine becomes a city-wide conquest game.
+        </p>
+      </div>
+
+      <!-- Steps grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+        {steps.map((step, i) => {
+          const Icon = step.Icon;
+          return (
+            <div
+              class="reveal group relative"
+              style={`transition-delay: ${i * 0.15}s`}
+            >
+              <div
+                class="relative h-full rounded-2xl overflow-hidden border transition-all duration-500 group-hover:-translate-y-1"
+                style={`background: rgba(255,255,255,0.02); border-color: ${step.color}20; backdrop-filter: blur(12px);`}
+              >
+                <!-- Top accent bar -->
+                <div
+                  class="absolute top-0 left-0 right-0 h-[2px]"
+                  style={`background: linear-gradient(90deg, transparent, ${step.color}, transparent);`}
+                ></div>
+
+                <!-- Hover glow overlay -->
+                <div
+                  class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={`background: radial-gradient(ellipse at top, ${step.color}08, transparent 70%);`}
+                ></div>
+
+                <!-- Decorative step number (background) -->
+                <div
+                  class="absolute -bottom-4 -right-2 font-display font-black text-[7rem] leading-none select-none pointer-events-none opacity-[0.04]"
+                  style={`color: ${step.color};`}
+                >{step.number}</div>
+
+                <!-- Card body -->
+                <div class="relative px-8 pt-9 pb-8">
+
+                  <!-- Step label + Icon row -->
+                  <div class="flex items-center gap-4 mb-7">
+                    <div
+                      class="w-12 h-12 rounded-xl flex items-center justify-center flex-none transition-all duration-300 group-hover:scale-110"
+                      style={`background: ${step.color}15; border: 1px solid ${step.color}30; color: ${step.color};`}
+                    >
+                      <Icon class="w-6 h-6" />
+                    </div>
+                    <span
+                      class="text-[11px] font-mono font-bold tracking-widest px-2.5 py-1 rounded-full"
+                      style={`color: ${step.color}; background: ${step.color}12;`}
+                    >STEP {step.number}</span>
+                  </div>
+
+                  <!-- Title & subtitle -->
+                  <h3 class="font-display font-black text-2xl dark:text-white text-dark-950 mb-2 leading-tight">
+                    {step.title}
+                  </h3>
+                  <p class="text-sm font-semibold mb-5" style={`color: ${step.color};`}>
+                    {step.subtitle}
+                  </p>
+
+                  <!-- Description -->
+                  <p class="dark:text-white/55 text-dark-500 text-sm leading-relaxed mb-7">
+                    {step.description}
+                  </p>
+
+                  <!-- Detail tags -->
+                  <div class="flex flex-wrap gap-2">
+                    {step.details.map((detail) => (
+                      <span
+                        class="text-[11px] font-medium px-2.5 py-1 rounded-full"
+                        style={`color: ${step.color}; background: ${step.color}10; border: 1px solid ${step.color}20;`}
+                      >{detail}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Connector arrow (desktop) -->
+              {i < steps.length - 1 && (
+                <div class="hidden lg:flex absolute -right-5 top-1/2 -translate-y-1/2 z-20">
+                  <div class="w-9 h-9 rounded-full glass flex items-center justify-center border border-neon-blue/20">
+                    <svg class="w-4 h-4 text-neon-blue/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path d="M9 18l6-6-6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      <!-- CTA row -->
+      <div class="text-center mt-16 reveal">
+        <a href="/download" class="btn-primary text-base px-10 py-4 inline-flex items-center gap-3">
+          <Rocket class="w-5 h-5 flex-none shrink-0" />
+          <span>Start Your Conquest</span>
+        </a>
+        <p class="dark:text-white/30 text-dark-400 text-sm mt-4">Free to download · No pay-to-win</p>
+      </div>
+
+    </div>
+  </div>
+</section>

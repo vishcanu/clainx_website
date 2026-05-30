@@ -1,0 +1,389 @@
+﻿---
+import { Flame, Wind, Zap, Droplets, Orbit, AlertTriangle } from 'lucide-react';
+import type { ComponentType } from 'react';
+
+type SiegePower = {
+  id: 'blaze' | 'whirl' | 'quake' | 'seep' | 'rift';
+  name: string;
+  tagline: string;
+  color: string;
+  glowColor: string;
+  Icon: ComponentType<any>;
+  unlock: string;
+  power: number;
+  description: string;
+  effect: string;
+  duration: string;
+  cooldown: string;
+};
+
+const powers: SiegePower[] = [
+  {
+    id: 'blaze',
+    name: 'BLAZE',
+    tagline: 'Burn it to the ground',
+    color: '#FF4500',
+    glowColor: 'rgba(255, 69, 0, 0.5)',
+    Icon: Flame,
+    unlock: 'COOKING+',
+    power: 60,
+    description: 'A firestorm that rips through adjacent territories, leaving scorched earth enemies must reclaim from scratch.',
+    effect: 'Burns 3 adjacent territories, weakens by 40%',
+    duration: '4h',
+    cooldown: '12h',
+  },
+  {
+    id: 'whirl',
+    name: 'WHIRL',
+    tagline: 'Spin the storm',
+    color: '#00BFFF',
+    glowColor: 'rgba(0, 191, 255, 0.5)',
+    Icon: Wind,
+    unlock: 'SLAPS+',
+    power: 75,
+    description: 'A spinning vortex that sweeps across rival zones, scrambling all XP tracking and activity detection.',
+    effect: 'Nullifies all rival XP gain in zone for 6h',
+    duration: '6h',
+    cooldown: '18h',
+  },
+  {
+    id: 'quake',
+    name: 'QUAKE',
+    tagline: 'Shake their empire',
+    color: '#C2803A',
+    glowColor: 'rgba(194, 128, 58, 0.5)',
+    Icon: Zap,
+    unlock: 'GOATED+',
+    power: 80,
+    description: "A seismic shockwave triggered by your footsteps. Rivals' building progress crumbles to the foundation.",
+    effect: 'Collapses rival building height by 50%',
+    duration: '8h',
+    cooldown: '24h',
+  },
+  {
+    id: 'seep',
+    name: 'SEEP',
+    tagline: 'Creep in silently',
+    color: '#2D9CDB',
+    glowColor: 'rgba(45, 156, 219, 0.5)',
+    Icon: Droplets,
+    unlock: 'GOATED+',
+    power: 88,
+    description: 'An invisible infiltration that silently absorbs rival border territories into your empire overnight.',
+    effect: 'Claims 5 rival border territories over 2h',
+    duration: '2h',
+    cooldown: '48h',
+  },
+  {
+    id: 'rift',
+    name: 'RIFT',
+    tagline: 'Erase their existence',
+    color: '#9400D3',
+    glowColor: 'rgba(148, 0, 211, 0.6)',
+    Icon: Orbit,
+    unlock: 'CERTIFIED only',
+    power: 100,
+    description: 'The rarest siege power. Opens a dimensional tear that erases an entire rival district from the map forever.',
+    effect: 'Destroys entire district — rivals rebuild from zero',
+    duration: '12h',
+    cooldown: '7 days',
+  },
+];
+---
+
+<section class="relative py-24 lg:py-32 overflow-hidden">
+  <div class="absolute inset-0 dark:bg-dark-950 bg-light-50"></div>
+  <div class="absolute inset-0 grid-overlay opacity-30"></div>
+  <div class="absolute top-1/2 left-0 w-[500px] h-[500px] bg-neon-orange/5 rounded-full blur-[120px] -translate-y-1/2"></div>
+  <div class="absolute top-1/2 right-0 w-[500px] h-[500px] bg-neon-purple/5 rounded-full blur-[120px] -translate-y-1/2"></div>
+
+  <div class="relative section-padding">
+    <div class="section-container">
+
+      <!-- Header -->
+      <div class="text-center mb-20 reveal">
+        <span class="badge-orange mb-4">Siege Powers</span>
+        <h2 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl dark:text-white text-dark-950 mt-4 mb-6">
+          Five Weapons.<br/>
+          <span class="gradient-text-fire">All Earned.</span>
+        </h2>
+        <p class="dark:text-white/50 text-dark-500 text-lg max-w-2xl mx-auto">
+          Deploy siege powers against rival territories. Each power is unlocked through real fitness milestones —
+          the more you move, the more devastation you can unleash.
+        </p>
+      </div>
+
+      <!-- Power cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-stretch stagger-children reveal">
+        {powers.map((p) => {
+          const Icon = p.Icon;
+          const dimGlow = p.glowColor.replace(/[\d.]+\)$/, '0.08)');
+          return (
+            <div
+              class="group relative rounded-2xl overflow-hidden border cursor-pointer transition-all duration-500 hover:-translate-y-1 flex flex-col h-full"
+              data-siege={p.id}
+              style={{
+                background: 'rgba(255,255,255,0.02)',
+                borderColor: `${p.color}25`,
+              }}
+            >
+              {/* Top accent bar */}
+              <div
+                class="absolute top-0 left-0 right-0 h-[2px] z-10"
+                style={{ background: `linear-gradient(90deg, transparent, ${p.color}, transparent)` }}
+              ></div>
+
+              {/* Base glow */}
+              <div
+                class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{ background: `radial-gradient(ellipse at top, ${dimGlow}, transparent 65%)` }}
+              ></div>
+
+              {/* ── BLAZE: ember particles ── */}
+              {p.id === 'blaze' && (
+                <div class="blaze-layer absolute inset-x-0 bottom-0 h-32 pointer-events-none overflow-hidden">
+                  {[0,1,2,3,4,5].map((i) => (
+                    <span
+                      key={i}
+                      class="blaze-ember absolute bottom-0 rounded-full"
+                      style={{
+                        left: `${10 + i * 15}%`,
+                        width:  `${3 + (i % 3) * 3}px`,
+                        height: `${3 + (i % 3) * 3}px`,
+                        background: i % 2 === 0 ? '#FF4500' : '#FF8C00',
+                        animationDelay: `${i * 0.22}s`,
+                      }}
+                    ></span>
+                  ))}
+                </div>
+              )}
+
+              {/* ── WHIRL: spinning elliptical rings ── */}
+              {p.id === 'whirl' && (
+                <div class="whirl-layer absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div class="whirl-ring whirl-r1" style={{ borderColor: '#00BFFF35' }}></div>
+                  <div class="whirl-ring whirl-r2" style={{ borderColor: '#00BFFF22' }}></div>
+                  <div class="whirl-ring whirl-r3" style={{ borderColor: '#00BFFF14' }}></div>
+                </div>
+              )}
+
+              {/* ── SEEP: liquid blob from bottom ── */}
+              {p.id === 'seep' && (
+                <div class="seep-layer absolute inset-x-0 bottom-0 overflow-hidden pointer-events-none" style={{ height: '60%' }}>
+                  <div
+                    class="seep-blob"
+                    style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 100%, rgba(45,156,219,0.3) 0%, transparent 70%)' }}
+                  ></div>
+                </div>
+              )}
+
+              {/* ── RIFT: dimensional cracks ── */}
+              {p.id === 'rift' && (
+                <div class="rift-layer absolute inset-0 pointer-events-none overflow-hidden">
+                  <div class="rift-crack rift-c1" style={{ background: 'linear-gradient(to bottom, transparent 10%, rgba(148,0,211,0.85) 50%, transparent 90%)' }}></div>
+                  <div class="rift-crack rift-c2" style={{ background: 'linear-gradient(to bottom, transparent 10%, rgba(200,80,255,0.6) 50%, transparent 90%)' }}></div>
+                  <div class="rift-crack rift-c3" style={{ background: 'linear-gradient(to bottom, transparent 20%, rgba(148,0,211,0.5) 50%, transparent 80%)' }}></div>
+                  <div
+                    class="rift-core-glow absolute inset-0"
+                    style={{ background: 'radial-gradient(ellipse at center, rgba(148,0,211,0.18), transparent 55%)' }}
+                  ></div>
+                </div>
+              )}
+
+              {/* Card content */}
+              <div class="relative z-10 p-5 flex flex-col flex-1">
+
+                {/* Icon + unlock tier */}
+                <div class="flex items-start justify-between mb-4">
+                  <div
+                    class="w-11 h-11 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+                    style={{
+                      background: `${p.color}18`,
+                      border: `1px solid ${p.color}35`,
+                      color: p.color,
+                    }}
+                  >
+                    <Icon class="w-5 h-5" />
+                  </div>
+                  <span
+                    class="text-[9px] font-black tracking-widest px-2 py-0.5 rounded-full mt-1"
+                    style={{
+                      color: p.color,
+                      background: `${p.color}15`,
+                      border: `1px solid ${p.color}20`,
+                    }}
+                  >{p.unlock}</span>
+                </div>
+
+                {/* Name + tagline */}
+                <h3
+                  class="font-display font-black text-2xl tracking-widest mb-0.5"
+                  style={{ color: p.color }}
+                >{p.name}</h3>
+                <p class="text-[11px] dark:text-white/35 text-dark-400 italic mb-3">{p.tagline}</p>
+
+                {/* Description */}
+                <p class="text-xs dark:text-white/55 text-dark-500 leading-relaxed flex-1 mb-3">
+                  {p.description}
+                </p>
+
+                {/* Effect pill */}
+                <div
+                  class="text-[10px] font-medium px-3 py-2 rounded-lg mb-3 leading-snug"
+                  style={{
+                    color: p.color,
+                    background: `${p.color}10`,
+                    border: `1px solid ${p.color}20`,
+                  }}
+                >{p.effect}</div>
+
+                {/* Duration / Cooldown */}
+                <div class="flex items-center justify-between text-[10px] font-mono mb-3">
+                  <div>
+                    <div class="dark:text-white/30 text-dark-400">Duration</div>
+                    <div class="font-bold" style={{ color: p.color }}>{p.duration}</div>
+                  </div>
+                  <div class="text-right">
+                    <div class="dark:text-white/30 text-dark-400">Cooldown</div>
+                    <div class="font-bold" style={{ color: p.color }}>{p.cooldown}</div>
+                  </div>
+                </div>
+
+                {/* Power bar */}
+                <div>
+                  <div class="flex items-center justify-between mb-1.5">
+                    <span class="text-[9px] dark:text-white/30 text-dark-400 font-mono tracking-widest">POWER</span>
+                    <span class="text-[9px] font-mono font-bold" style={{ color: p.color }}>{p.power}%</span>
+                  </div>
+                  <div class="h-1 dark:bg-white/5 bg-dark-100 rounded-full overflow-hidden">
+                    <div
+                      class="h-full rounded-full"
+                      style={{
+                        width: `${p.power}%`,
+                        background: `linear-gradient(to right, ${p.color}, ${p.color}88)`,
+                        boxShadow: `0 0 6px ${p.color}`,
+                      }}
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <!-- Bottom note -->
+      <div class="text-center mt-16 reveal">
+        <div class="glass inline-flex items-center gap-3 px-6 py-3 rounded-full">
+          <AlertTriangle class="w-4 h-4 text-neon-lime flex-none" />
+          <span class="text-sm dark:text-white/60 text-dark-500">
+            All siege powers unlock through real fitness milestones.
+            <span class="dark:text-white/90 text-dark-900 font-semibold"> Zero pay-to-win.</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  /* ════════════════════════════════════════
+     BLAZE — orange ember particles float up
+  ════════════════════════════════════════ */
+  @keyframes siege-ember-rise {
+    0%   { transform: translateY(0)     scale(1);   opacity: 0.9; }
+    60%  { transform: translateY(-55px) scale(0.5); opacity: 0.5; }
+    100% { transform: translateY(-95px) scale(0);   opacity: 0;   }
+  }
+  .blaze-layer { opacity: 0; transition: opacity 0.3s; }
+  [data-siege="blaze"]:hover .blaze-layer { opacity: 1; }
+  .blaze-ember {
+    animation: siege-ember-rise 1.15s ease-out infinite;
+    filter: blur(1.5px);
+    box-shadow: 0 0 6px #FF4500;
+  }
+
+  /* ════════════════════════════════════════
+     WHIRL — elliptical rings spin like a tornado
+  ════════════════════════════════════════ */
+  @keyframes siege-whirl-cw  { to { transform: rotate(360deg);  } }
+  @keyframes siege-whirl-ccw { to { transform: rotate(-360deg); } }
+  .whirl-layer { opacity: 0; transition: opacity 0.3s; }
+  [data-siege="whirl"]:hover .whirl-layer { opacity: 1; }
+  .whirl-ring {
+    position: absolute;
+    border-radius: 50%;
+    border-width: 1px;
+    border-style: dashed;
+  }
+  .whirl-r1 { width: 80px;  height: 48px;  animation: siege-whirl-cw   1.8s linear infinite; }
+  .whirl-r2 { width: 130px; height: 78px;  animation: siege-whirl-ccw  2.6s linear infinite; }
+  .whirl-r3 { width: 180px; height: 108px; animation: siege-whirl-cw   3.6s linear infinite; }
+
+  /* ════════════════════════════════════════
+     QUAKE — card shakes on hover
+  ════════════════════════════════════════ */
+  @keyframes siege-quake {
+    0%,100% { transform: translate(0, 0)      rotate(0deg);    }
+    10%     { transform: translate(-5px, 0)   rotate(-0.5deg); }
+    20%     { transform: translate(5px, 0)    rotate(0.5deg);  }
+    30%     { transform: translate(-4px, 1px) rotate(-0.3deg); }
+    40%     { transform: translate(4px, -1px) rotate(0.3deg);  }
+    50%     { transform: translate(-3px, 0);                   }
+    60%     { transform: translate(3px, 0);                    }
+    70%     { transform: translate(-2px, 1px);                 }
+    80%     { transform: translate(2px, -1px);                 }
+    90%     { transform: translate(-1px, 0);                   }
+  }
+  [data-siege="quake"]:hover {
+    animation: siege-quake 0.55s ease-in-out;
+  }
+
+  /* ════════════════════════════════════════
+     SEEP — liquid blob creeps up from bottom
+  ════════════════════════════════════════ */
+  @keyframes siege-seep-rise {
+    0%   { transform: translateY(100%) scaleX(0.4); opacity: 0;   }
+    30%  { opacity: 1; }
+    100% { transform: translateY(-20%) scaleX(1.3); opacity: 0;   }
+  }
+  .seep-layer { opacity: 0; transition: opacity 0.3s; }
+  [data-siege="seep"]:hover .seep-layer { opacity: 1; }
+  .seep-blob {
+    width: 100%;
+    height: 100%;
+    transform-origin: bottom center;
+    border-radius: 60% 60% 0 0;
+    animation: siege-seep-rise 2.4s ease-in-out infinite;
+  }
+
+  /* ════════════════════════════════════════
+     RIFT — diagonal cracks + glitch distortion
+  ════════════════════════════════════════ */
+  @keyframes siege-rift-crack {
+    0%,100% { opacity: 0; transform: scaleY(0) rotate(var(--r)); }
+    35%,65% { opacity: 1; transform: scaleY(1) rotate(var(--r)); }
+  }
+  @keyframes siege-rift-glitch {
+    0%,100% { transform: translate(0,0)     skewX(0deg);   filter: none; }
+    12%     { transform: translate(-4px,0)  skewX(-2deg);  filter: hue-rotate(60deg)  saturate(2); }
+    24%     { transform: translate(4px,0)   skewX(2deg);   filter: hue-rotate(-60deg) saturate(2); }
+    36%     { transform: translate(-2px,0)  skewX(-1deg);  filter: none; }
+    48%     { transform: translate(2px,0)   skewX(1deg);   filter: hue-rotate(90deg); }
+    60%     { transform: translate(0,0)     skewX(0deg);   filter: none; }
+  }
+  .rift-layer { opacity: 0; transition: opacity 0.3s; }
+  [data-siege="rift"]:hover .rift-layer { opacity: 1; }
+  .rift-crack {
+    position: absolute;
+    top: -10%;
+    height: 120%;
+    width: 1.5px;
+    transform-origin: top center;
+  }
+  .rift-c1 { left: 38%; --r: 14deg;  animation: siege-rift-crack 1.6s ease-in-out infinite; }
+  .rift-c2 { left: 58%; --r: -9deg;  animation: siege-rift-crack 1.6s ease-in-out infinite 0.5s; }
+  .rift-c3 { left: 50%; --r: 4deg;   animation: siege-rift-crack 1.6s ease-in-out infinite 0.9s; width: 2.5px; }
+  .rift-core-glow { animation: siege-rift-glitch 2.2s ease-in-out infinite; }
+  [data-siege="rift"]:hover { animation: siege-rift-glitch 2.2s ease-in-out infinite; }
+</style>

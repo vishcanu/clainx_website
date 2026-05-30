@@ -1,0 +1,325 @@
+﻿---
+import {
+  Footprints, Activity, Bike,
+  Flame, Trophy, Zap, Gift,
+  MapPin, Compass,
+  Shield, CheckCircle, ArrowRight, Smartphone,
+} from 'lucide-react';
+---
+
+<section id="hero" class="relative min-h-screen flex items-center overflow-hidden dark:bg-dark-950 bg-light-50">
+
+  <!-- Background layers -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute inset-0 grid-overlay opacity-40"></div>
+    <div class="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-neon-blue/6 blur-[120px] animate-orb-float"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-neon-purple/6 blur-[100px] animate-orb-float" style="animation-delay: -5s;"></div>
+  </div>
+
+  <div class="relative z-10 section-padding w-full">
+    <div class="section-container">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-20 items-center min-h-[calc(100vh-72px)] py-16">
+
+        <!-- â”€â”€ Left: Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+        <div class="flex flex-col gap-6 lg:gap-7">
+
+          <!-- Tagline badge -->
+          <div class="hero-badge opacity-0 translate-y-4">
+            <span class="badge-blue inline-flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-neon-lime animate-pulse"></span>
+              Health as a Game. Life as a Victory.
+            </span>
+          </div>
+
+          <!-- Headline -->
+          <div class="hero-headline opacity-0 translate-y-8" style="transition-delay: 0.1s;">
+            <h1 class="font-display font-black leading-none tracking-tighter dark:text-white text-dark-950">
+              <span class="block text-5xl sm:text-6xl lg:text-7xl xl:text-8xl mb-2">Turn Your</span>
+              <span class="block text-5xl sm:text-6xl lg:text-7xl xl:text-8xl mb-2 gradient-text text-glow-blue">City Into</span>
+              <span class="block text-5xl sm:text-6xl lg:text-7xl xl:text-8xl">Your Empire.</span>
+            </h1>
+          </div>
+
+          <!-- Description -->
+          <p class="hero-desc opacity-0 translate-y-6 dark:text-white/60 text-dark-500 text-lg sm:text-xl leading-relaxed max-w-lg" style="transition-delay: 0.2s;">
+            Walk, run, or cycle to claim real-world territory on the live city map.
+            Build towering empires, wage siege warfare, and
+            <span class="dark:text-white/90 text-dark-900 font-semibold">unlock local deals in your neighbourhood.</span>
+          </p>
+
+          <!-- Activity pills -->
+          <div class="hero-activities opacity-0 translate-y-4 flex flex-wrap gap-3" style="transition-delay: 0.25s;">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm font-semibold" style="color:#AAFF00;border-color:#AAFF0020;">
+              <Footprints class="w-4 h-4 flex-none shrink-0" />
+              <span>Walk</span>
+            </div>
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm font-semibold" style="color:#00D4FF;border-color:#00D4FF20;">
+              <Activity class="w-4 h-4 flex-none shrink-0" />
+              <span>Run</span>
+            </div>
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm font-semibold" style="color:#FF6B00;border-color:#FF6B0020;">
+              <Bike class="w-4 h-4 flex-none shrink-0" />
+              <span>Cycle</span>
+            </div>
+          </div>
+
+          <!-- CTAs -->
+          <div class="hero-ctas opacity-0 translate-y-6 flex flex-wrap gap-4" style="transition-delay: 0.3s;">
+            <a href="/download" class="btn-primary text-base px-8 py-4 inline-flex items-center gap-3">
+              <Smartphone class="w-5 h-5 flex-none shrink-0" />
+              <span>Get on Android</span>
+            </a>
+            <a href="/download#waitlist" class="btn-secondary text-base px-8 py-4 inline-flex items-center gap-3">
+              <span>Join Waitlist</span>
+              <ArrowRight class="w-5 h-5 flex-none shrink-0" />
+            </a>
+          </div>
+
+          <!-- Trust row -->
+          <div class="hero-trust opacity-0 translate-y-4 flex flex-wrap gap-4 pt-4 border-t dark:border-white/10 border-dark-900/10" style="transition-delay: 0.4s;">
+            <div class="flex items-center gap-1.5 text-sm dark:text-white/40 text-dark-400">
+              <CheckCircle class="w-4 h-4 text-neon-lime flex-none shrink-0" />
+              <span>Free to play</span>
+            </div>
+            <div class="flex items-center gap-1.5 text-sm dark:text-white/40 text-dark-400">
+              <Shield class="w-4 h-4 text-neon-lime flex-none shrink-0" />
+              <span>Zero pay-to-win</span>
+            </div>
+            <div class="flex items-center gap-1.5 text-sm dark:text-white/40 text-dark-400">
+              <Smartphone class="w-4 h-4 text-neon-lime flex-none shrink-0" />
+              <span>Android beta</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- â”€â”€ Right: MapLibre Map â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+        <div class="hero-map opacity-0 scale-95 relative" style="transition-delay: 0.15s;">
+          <div class="relative aspect-square max-w-xl mx-auto lg:max-w-none">
+
+            <!-- Outer glow ring -->
+            <div class="absolute inset-0 rounded-2xl lg:rounded-3xl border border-neon-blue/15 animate-border-glow pointer-events-none z-20"></div>
+
+            <!-- Map container -->
+            <div class="relative rounded-2xl lg:rounded-3xl overflow-hidden border border-neon-blue/10 shadow-glass" style="aspect-ratio: 1;">
+
+              <!-- MapLibre canvas replaced with Bangalore SVG -->
+              <svg id="blr-map-svg" class="absolute inset-0 w-full h-full" viewBox="0 0 480 480"
+                xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                  <filter id="glow-soft">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                  <filter id="glow-route">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>
+                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                  <pattern id="map-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#00D4FF" stroke-width="0.3" stroke-opacity="0.12"/>
+                  </pattern>
+                  <radialGradient id="center-glow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#00D4FF" stop-opacity="0.07"/>
+                    <stop offset="100%" stop-color="#00D4FF" stop-opacity="0"/>
+                  </radialGradient>
+                </defs>
+                <rect width="480" height="480" fill="#07101e"/>
+                <rect width="480" height="480" fill="url(#map-grid)"/>
+                <rect width="480" height="480" fill="url(#center-glow)"/>
+                <path d="M 98 82 L 155 48 L 230 38 L 310 52 L 375 88 L 418 150 L 432 228 L 425 318 L 395 390 L 330 435 L 240 448 L 152 440 L 88 396 L 55 312 L 50 215 L 68 138 Z"
+                  fill="rgba(0,212,255,0.035)" stroke="#00D4FF" stroke-width="1.2" stroke-opacity="0.25"
+                  stroke-dasharray="5 4" filter="url(#glow-soft)"/>
+                <ellipse cx="240" cy="240" rx="175" ry="160" fill="none" stroke="rgba(148,163,184,0.18)" stroke-width="2"/>
+                <ellipse cx="240" cy="240" rx="88" ry="80" fill="none" stroke="rgba(148,163,184,0.14)" stroke-width="1.5"/>
+                <line x1="240" y1="240" x2="240" y2="52" stroke="rgba(148,163,184,0.2)" stroke-width="1.5"/>
+                <line x1="240" y1="240" x2="418" y2="148" stroke="rgba(148,163,184,0.2)" stroke-width="1.5"/>
+                <line x1="240" y1="240" x2="422" y2="332" stroke="rgba(148,163,184,0.2)" stroke-width="1.5"/>
+                <line x1="240" y1="240" x2="240" y2="430" stroke="rgba(148,163,184,0.2)" stroke-width="1.5"/>
+                <line x1="240" y1="240" x2="58" y2="332" stroke="rgba(148,163,184,0.2)" stroke-width="1.5"/>
+                <line x1="240" y1="240" x2="62" y2="148" stroke="rgba(148,163,184,0.2)" stroke-width="1.5"/>
+                <line x1="80" y1="130" x2="400" y2="130" stroke="rgba(148,163,184,0.09)" stroke-width="1"/>
+                <line x1="80" y1="360" x2="400" y2="360" stroke="rgba(148,163,184,0.09)" stroke-width="1"/>
+                <line x1="130" y1="75" x2="130" y2="405" stroke="rgba(148,163,184,0.09)" stroke-width="1"/>
+                <line x1="355" y1="75" x2="355" y2="405" stroke="rgba(148,163,184,0.09)" stroke-width="1"/>
+                <g id="hex-territories"></g>
+                <polyline points="148,315 172,278 208,258 240,240 278,224 315,212 348,198"
+                  fill="none" stroke="#00D4FF" stroke-width="2.5" stroke-dasharray="6 3"
+                  stroke-opacity="0.9" filter="url(#glow-route)"/>
+                <circle cx="348" cy="198" r="5" fill="#00D4FF" filter="url(#glow-soft)">
+                  <animate attributeName="r" values="5;8;5" dur="2s" repeatCount="indefinite"/>
+                  <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="348" cy="198" r="10" fill="none" stroke="#00D4FF" stroke-width="1" stroke-opacity="0.4">
+                  <animate attributeName="r" values="8;20;8" dur="2s" repeatCount="indefinite"/>
+                  <animate attributeName="opacity" values="0.5;0;0.5" dur="2s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="355" cy="330" r="4" fill="#FF6B00" filter="url(#glow-soft)">
+                  <animate attributeName="r" values="4;7;4" dur="3s" repeatCount="indefinite"/>
+                  <animate attributeName="opacity" values="1;0.4;1" dur="3s" repeatCount="indefinite"/>
+                </circle>
+                <text x="240" y="228" text-anchor="middle" fill="#E2E8F0" font-size="8.5" font-family="JetBrains Mono,monospace" opacity="0.75" font-weight="600">MG ROAD</text>
+                <text x="318" y="295" text-anchor="middle" fill="#94A3B8" font-size="7" font-family="JetBrains Mono,monospace" opacity="0.6">KORAMANGALA</text>
+                <text x="325" y="190" text-anchor="middle" fill="#94A3B8" font-size="7" font-family="JetBrains Mono,monospace" opacity="0.6">INDIRANAGAR</text>
+                <text x="158" y="168" text-anchor="middle" fill="#94A3B8" font-size="7" font-family="JetBrains Mono,monospace" opacity="0.55">MALLESHWARAM</text>
+                <text x="162" y="335" text-anchor="middle" fill="#94A3B8" font-size="7" font-family="JetBrains Mono,monospace" opacity="0.55">JP NAGAR</text>
+                <text x="398" y="215" text-anchor="middle" fill="#94A3B8" font-size="7" font-family="JetBrains Mono,monospace" opacity="0.45">WHITEFIELD</text>
+                <text x="240" y="98" text-anchor="middle" fill="#94A3B8" font-size="7" font-family="JetBrains Mono,monospace" opacity="0.45">HEBBAL</text>
+              </svg>
+
+              <!-- Top-left: LIVE indicator -->
+              <div class="absolute top-4 left-4 z-10 glass px-3 py-1.5 rounded-full flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-neon-lime animate-pulse"></span>
+                <span class="text-xs font-mono text-neon-lime">LIVE · BLR</span>
+              </div>
+
+              <!-- Top-right: Compass -->
+              <div class="absolute top-4 right-4 z-10 w-9 h-9 glass rounded-full flex items-center justify-center">
+                <Compass class="w-5 h-5 text-neon-blue" />
+              </div>
+
+              <!-- Bottom strip -->
+              <div class="absolute bottom-0 left-0 right-0 z-10 glass border-t border-neon-blue/10 px-4 py-2.5 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <MapPin class="w-3.5 h-3.5 text-neon-blue flex-none" />
+                  <span class="text-xs font-mono text-neon-blue">Territory War Active</span>
+                </div>
+                <span class="text-xs text-neon-lime font-mono">+XP</span>
+              </div>
+            </div>
+
+            <!-- Floating panels -->
+            <!-- Calories -->
+            <div class="absolute -left-4 top-[22%] glass rounded-2xl p-3 shadow-neon-orange animate-float z-20" style="animation-delay: -2s;">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-xl bg-neon-orange/20 flex items-center justify-center">
+                  <Flame class="w-4 h-4 text-neon-orange" />
+                </div>
+                <div>
+                  <div class="text-[10px] dark:text-white/40 text-dark-400">Calories</div>
+                  <div class="text-sm font-display font-black text-neon-orange">—</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Rank -->
+            <div class="absolute -right-4 top-[30%] glass rounded-2xl p-3 shadow-neon-purple animate-float z-20" style="animation-delay: -4s;">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-xl bg-neon-purple/20 flex items-center justify-center">
+                  <Trophy class="w-4 h-4 text-neon-purple" />
+                </div>
+                <div>
+                  <div class="text-[10px] dark:text-white/40 text-dark-400">City Rank</div>
+                  <div class="text-sm font-display font-black text-neon-purple">—</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Siege -->
+            <div class="absolute -left-4 bottom-[22%] glass rounded-2xl p-3 animate-float z-20" style="animation-delay: -1s;">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-xl bg-neon-blue/20 flex items-center justify-center">
+                  <Zap class="w-4 h-4 text-neon-blue" />
+                </div>
+                <div>
+                  <div class="text-[10px] dark:text-white/40 text-dark-400">Siege</div>
+                  <div class="text-sm font-display font-black text-neon-blue">READY</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Neighbourhood offer -->
+            <div class="absolute -right-4 bottom-[30%] glass rounded-2xl p-3 shadow-neon-lime animate-float z-20" style="animation-delay: -6s;">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-xl bg-neon-lime/20 flex items-center justify-center">
+                  <Gift class="w-4 h-4 text-neon-lime" />
+                </div>
+                <div>
+                  <div class="text-[10px] dark:text-white/40 text-dark-400">Nearby offer</div>
+                  <div class="text-sm font-display font-black text-neon-lime">Unlocked</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+    <span class="text-xs font-mono dark:text-white/50 text-dark-400 uppercase tracking-widest">Scroll</span>
+    <div class="w-px h-8 bg-gradient-to-b from-neon-blue/60 to-transparent"></div>
+  </div>
+</section>
+
+
+<script>
+  import { gsap } from 'gsap';
+
+  // ── Hero entrance ─────────────────────────────────────────
+  const tl = gsap.timeline({ delay: 0.2 });
+  tl.to('.hero-badge',      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' })
+    .to('.hero-headline',   { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.3')
+    .to('.hero-desc',       { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, '-=0.5')
+    .to('.hero-activities', { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.4')
+    .to('.hero-ctas',       { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, '-=0.3')
+    .to('.hero-trust',      { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.2')
+    .to('.hero-map',        { opacity: 1, scale: 1, duration: 1, ease: 'power2.out' }, '-=0.8');
+
+  // ── Hex territory grid ────────────────────────────────────
+  const g = document.getElementById('hex-territories');
+  if (g) {
+    const R = 22;
+    const HX = R * Math.sqrt(3);
+    const HY = R * 1.5;
+    const NS = 'http://www.w3.org/2000/svg';
+
+    const hexPoints = (cx: number, cy: number) =>
+      Array.from({ length: 6 }, (_, i) => {
+        const a = (Math.PI / 3) * i - Math.PI / 6;
+        return `${(cx + R * Math.cos(a)).toFixed(1)},${(cy + R * Math.sin(a)).toFixed(1)}`;
+      }).join(' ');
+
+    const unclaimed: SVGPolygonElement[] = [];
+
+    for (let row = 0; row < 10; row++) {
+      for (let col = 0; col < 10; col++) {
+        const cx = 52 + col * HX + (row % 2) * HX * 0.5;
+        const cy = 50 + row * HY;
+        const dx = cx - 240, dy = cy - 240;
+        if (Math.sqrt(dx * dx + dy * dy) > 200) continue;
+
+        const dc = col - 4.5, dr = row - 4.5;
+        const dist = Math.sqrt(dc * dc + dr * dr);
+        const isPlayer = dist < 2.8 && Math.random() > 0.15;
+        const isRival  = !isPlayer && (col > 6 || row > 6) && Math.random() > 0.4;
+
+        const fill    = isPlayer ? '#00D4FF' : isRival ? '#FF6B00' : '#94A3B8';
+        const fOpacity = isPlayer
+          ? (0.18 + Math.random() * 0.18).toFixed(2)
+          : isRival ? (0.12 + Math.random() * 0.12).toFixed(2)
+          : '0.03';
+        const sOpacity = isPlayer ? '0.65' : isRival ? '0.5' : '0.18';
+
+        const poly = document.createElementNS(NS, 'polygon');
+        poly.setAttribute('points', hexPoints(cx, cy));
+        poly.setAttribute('fill', fill);
+        poly.setAttribute('fill-opacity', fOpacity);
+        poly.setAttribute('stroke', fill);
+        poly.setAttribute('stroke-width', '0.8');
+        poly.setAttribute('stroke-opacity', sOpacity);
+        g.appendChild(poly);
+        if (!isPlayer && !isRival) unclaimed.push(poly);
+      }
+    }
+
+    let claimIdx = 0;
+    setInterval(() => {
+      if (claimIdx >= unclaimed.length) return;
+      const p = unclaimed[claimIdx++];
+      p.setAttribute('fill', '#00D4FF');
+      p.setAttribute('fill-opacity', '0.22');
+      p.setAttribute('stroke', '#00D4FF');
+      p.setAttribute('stroke-opacity', '0.65');
+    }, 2800);
+  }
+</script>

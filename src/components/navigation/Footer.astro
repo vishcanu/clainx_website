@@ -1,0 +1,162 @@
+---
+const footerLinks = {
+  product: [
+    { label: 'Features', href: '/features' },
+    { label: 'Arena', href: '/arena' },
+    { label: 'Download', href: '/download' },
+    { label: 'Changelog', href: '/changelog' },
+  ],
+  company: [
+    { label: 'About', href: '/about' },
+    { label: 'Blog', href: '/blog' },
+    { label: 'Careers', href: '/careers' },
+    { label: 'Press', href: '/press' },
+  ],
+  legal: [
+    { label: 'Privacy Policy', href: '/privacy' },
+    { label: 'Terms of Service', href: '/terms' },
+    { label: 'Cookie Policy', href: '/cookies' },
+  ],
+};
+
+const socials = [
+  { label: 'Twitter/X', href: 'https://twitter.com/claimxapp', icon: 'X' },
+  { label: 'Instagram', href: 'https://instagram.com/claimxapp', icon: 'IG' },
+  { label: 'Discord', href: 'https://discord.gg/claimx', icon: 'DC' },
+  { label: 'TikTok', href: 'https://tiktok.com/@claimxapp', icon: 'TT' },
+];
+---
+
+<footer class="relative border-t dark:border-white/5 border-dark-900/10 overflow-hidden">
+  <!-- Background -->
+  <div class="absolute inset-0 dark:bg-dark-900 bg-light-100"></div>
+  <div class="absolute inset-0 grid-overlay opacity-30 pointer-events-none"></div>
+  
+  <!-- Glow orb -->
+  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-neon-blue/5 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="relative section-padding py-16 lg:py-20">
+    <div class="section-container">
+      <!-- Top row -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
+        
+        <!-- Brand column -->
+        <div class="lg:col-span-2">
+          <a href="/" class="flex items-center gap-2.5 mb-4">
+            <div class="w-9 h-9 rounded-xl bg-dark-800 border border-neon-blue/20 flex items-center justify-center">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L3 7v10l9 5 9-5V7L12 2Z" stroke="url(#footerLogoGrad)" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M12 2v20M3 7l9 5 9-5" stroke="url(#footerLogoGrad)" stroke-width="1.5"/>
+                <defs>
+                  <linearGradient id="footerLogoGrad" x1="3" y1="2" x2="21" y2="22" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#00D4FF"/><stop offset="1" stop-color="#00FFE7"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <span class="font-display font-bold text-xl dark:text-white text-dark-900">
+              Claim<span class="gradient-text">X</span>
+            </span>
+          </a>
+
+          <p class="dark:text-white/50 text-dark-500 text-sm leading-relaxed max-w-xs mb-6">
+            Health as a Game. Life as a Victory.<br/>
+            Claim real-world territory by running, walking, and cycling your city.
+          </p>
+
+          <!-- Socials -->
+          <div class="flex items-center gap-3">
+            {socials.map((social) => (
+              <a
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                class="w-9 h-9 rounded-lg glass flex items-center justify-center text-xs font-bold dark:text-white/50 text-dark-500 hover:text-neon-blue hover:border-neon-blue/30 transition-all duration-300"
+              >
+                {social.icon}
+              </a>
+            ))}
+          </div>
+
+          <!-- App store -->
+          <div class="flex items-center gap-3 mt-6">
+            <a href="/download" class="flex items-center gap-2 px-4 py-2 rounded-xl dark:bg-white/5 bg-dark-900/5 border dark:border-white/10 border-dark-900/10 hover:border-neon-blue/30 transition-all duration-300 group">
+              <svg class="w-5 h-5 dark:text-white/70 group-hover:text-neon-blue transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                <path d="m3.18 23.76 9.19-9.19-2.17-2.17-7.02 11.36zm14.64-14.64L3.93 1.48A2 2 0 0 0 2 3.3v17.4a2 2 0 0 0 1.93 1.82l13.89-13.4zm-6.56 5.44-7.29 7.29L16.2 14.4l-4.94-4.84zm6.53-6.09-3.98 3.97 3.98 3.98a2 2 0 0 0 0-7.95z"/>
+              </svg>
+              <div>
+                <div class="text-[9px] dark:text-white/40 text-dark-400 leading-none">Get it on</div>
+                <div class="text-xs font-semibold dark:text-white text-dark-900 leading-none mt-0.5">Google Play</div>
+              </div>
+            </a>
+            <span class="text-xs dark:text-white/25 text-dark-400">iOS coming soon</span>
+          </div>
+        </div>
+
+        <!-- Links columns -->
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-widest text-neon-blue/70 mb-4">Product</h4>
+          <ul class="space-y-3">
+            {footerLinks.product.map((link) => (
+              <li>
+                <a href={link.href} class="dark:text-white/50 text-dark-500 hover:text-neon-blue text-sm transition-colors duration-300">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-widest text-neon-blue/70 mb-4">Company</h4>
+          <ul class="space-y-3">
+            {footerLinks.company.map((link) => (
+              <li>
+                <a href={link.href} class="dark:text-white/50 text-dark-500 hover:text-neon-blue text-sm transition-colors duration-300">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-widest text-neon-blue/70 mb-4">Legal</h4>
+          <ul class="space-y-3">
+            {footerLinks.legal.map((link) => (
+              <li>
+                <a href={link.href} class="dark:text-white/50 text-dark-500 hover:text-neon-blue text-sm transition-colors duration-300">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom row -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t dark:border-white/5 border-dark-900/10">
+        <p class="dark:text-white/30 text-dark-400 text-sm">
+          © {new Date().getFullYear()} ClaimX, Inc. All rights reserved.
+        </p>
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-neon-lime animate-pulse-glow"></span>
+          <span class="dark:text-white/30 text-dark-400 text-sm">System operational</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Mobile sticky CTA -->
+<div class="fixed bottom-0 left-0 right-0 z-40 md:hidden pb-safe">
+  <div class="glass border-t dark:border-white/10 border-dark-900/10 px-4 py-3 flex gap-3">
+    <a href="/download#waitlist" class="flex-1 btn-secondary justify-center py-3 text-sm">
+      Join Waitlist
+    </a>
+    <a href="/download" class="flex-1 btn-primary justify-center py-3 text-sm">
+      Get App
+    </a>
+  </div>
+</div>

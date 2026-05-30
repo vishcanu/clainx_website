@@ -1,0 +1,34 @@
+﻿---
+import { Smartphone, ArrowRight } from 'lucide-react';
+---
+
+<section class="relative py-12 overflow-hidden dark:border-y dark:border-white/5 border-y border-dark-900/8">
+  <div class="absolute inset-0 dark:bg-dark-900/50 bg-light-100/50"></div>
+  <div class="absolute inset-0 grid-overlay opacity-10"></div>
+
+  <div class="relative section-padding">
+    <div class="section-container">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-6 text-center sm:text-left">
+
+        <!-- Icon -->
+        <div class="w-14 h-14 rounded-2xl bg-neon-lime/15 flex items-center justify-center flex-none">
+          <Smartphone class="w-7 h-7 text-neon-lime" />
+        </div>
+
+        <!-- Copy -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-widest text-neon-lime mb-1">Android Beta &mdash; Launching June 2026</p>
+          <p class="dark:text-white/70 text-dark-600 text-base font-medium">
+            ClaimX is built for Android first. Join the waitlist to be among the first players on the map.
+          </p>
+        </div>
+
+        <!-- CTA -->
+        <a href="/download#waitlist" class="btn-primary whitespace-nowrap flex-none inline-flex items-center gap-2">
+          <span>Join Waitlist</span>
+          <ArrowRight class="w-4 h-4 flex-none shrink-0" />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

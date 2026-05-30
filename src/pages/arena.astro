@@ -1,0 +1,173 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/navigation/Navbar.astro';
+import Footer from '../components/navigation/Footer.astro';
+import icons from '../lib/icons';
+
+// Season 01 hasn't started yet — leaderboard is empty
+const activeChallenges = [
+  { name: 'Sprint Blitz', desc: 'Claim 50 territories in your first week', reward: '5,000 XP', icon: 'run', color: '#00D4FF' },
+  { name: 'Blaze Baptism', desc: 'Use Blaze siege 3 times', reward: 'Exclusive badge', icon: 'flame', color: '#FF6B00' },
+  { name: 'Marathon Mode', desc: 'Run 42km in a single session', reward: 'GOATED tier boost', icon: 'cycle', color: '#AAFF00' },
+  { name: 'District King', desc: 'Own all zones in one district', reward: 'Crown territory', icon: 'crown', color: '#8B5CF6' },
+];
+
+const seasonStats = [
+  { label: 'Season', value: '01' },
+  { label: 'Players', value: '—' },
+  { label: 'Cities', value: '—' },
+  { label: 'Status', value: 'Pre-Launch' },
+];
+---
+
+<BaseLayout
+  title="Arena"
+  description="The ClaimX Arena — global leaderboards, territory challenges, and seasonal competitions. Season 01 launches with the Android beta in June 2026."
+>
+---
+
+<BaseLayout
+  title="Arena"
+  description="The ClaimX Arena — real-time global leaderboards, territory challenges, alliance wars, and seasonal competitions."
+>
+  <Navbar />
+  <main>
+    <!-- Hero -->
+    <section class="relative py-20 overflow-hidden">
+      <div class="absolute inset-0 dark:bg-dark-950 bg-light-50"></div>
+      <div class="absolute inset-0 grid-overlay opacity-30"></div>
+      <div class="absolute top-1/2 right-0 w-[600px] h-[500px] bg-neon-orange/6 rounded-full blur-[120px] -translate-y-1/2"></div>
+
+      <div class="relative section-padding">
+        <div class="section-container">
+          <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 mb-12">
+            <div>
+              <span class="badge-orange mb-4 inline-block">Season 04 — Active</span>
+              <h1 class="font-display font-black text-5xl sm:text-6xl lg:text-7xl dark:text-white text-dark-950 leading-none tracking-tighter mt-4">
+                The Arena.<br/>
+                <span class="gradient-text-fire">Where Legends Are Made.</span>
+              </h1>
+            </div>
+
+            <!-- Season stats -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-3">
+              {seasonStats.map((stat) => (
+                <div class="glass rounded-2xl px-4 py-3 text-center min-w-[80px]">
+                  <div class="font-display font-black text-2xl gradient-text-fire">{stat.value}</div>
+                  <div class="text-xs dark:text-white/40 text-dark-400 mt-0.5">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Timer -->
+          <div class="glass rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-12">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-neon-orange/20 flex items-center justify-center">
+                <svg class="w-5 h-5 text-neon-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                  <path d="M12 6v6l4 2" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div>
+                <div class="text-sm font-semibold dark:text-white text-dark-900">Season 04 ends in</div>
+                <div class="text-xs dark:text-white/40 text-dark-400">Top 10 players win prizes</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 font-mono">
+              {['14', '08', '32', '45'].map((v, i) => (
+                <>
+                  <div class="bg-neon-orange/10 border border-neon-orange/20 rounded-xl px-3 py-2 text-center min-w-[52px]">
+                    <div class="text-xl font-black text-neon-orange">{v}</div>
+                    <div class="text-[9px] text-neon-orange/50">{['DAYS', 'HRS', 'MIN', 'SEC'][i]}</div>
+                  </div>
+                  {i < 3 && <span class="text-neon-orange/40 font-black text-xl">:</span>}
+                </>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Leaderboard + Challenges grid -->
+    <section class="relative pb-24 overflow-hidden dark:bg-dark-950 bg-light-50">
+      <div class="relative section-padding">
+        <div class="section-container">
+          <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+            
+            <!-- Leaderboard (2/3 width) -->
+            <div class="xl:col-span-2">
+              <div class="flex items-center justify-between mb-6">
+                <h2 class="font-display font-bold text-2xl dark:text-white text-dark-950">Global Leaderboard</h2>
+                <div class="glass px-3 py-1.5 rounded-full text-xs font-mono text-neon-orange">Season 01 · Pre-Launch</div>
+              </div>
+
+              <!-- Empty state -->
+              <div class="glass rounded-2xl p-12 text-center border-dashed" style="border-style: dashed; border-color: rgba(0,212,255,0.2);">
+                <div class="w-16 h-16 rounded-2xl bg-neon-blue/10 flex items-center justify-center mx-auto mb-6">
+                  <span class="w-8 h-8 text-neon-blue" set:html={icons.trophy}></span>
+                </div>
+                <h3 class="font-display font-bold text-2xl dark:text-white text-dark-950 mb-3">Season 01 Launching with the App</h3>
+                <p class="dark:text-white/50 text-dark-500 text-base max-w-sm mx-auto mb-8">
+                  No players yet. The map is empty. Be the first to claim your city and dominate the Season 01 leaderboard.
+                </p>
+                <a href="/download#waitlist" class="btn-primary gap-2 inline-flex">
+                  <span class="w-4 h-4 flex-none" set:html={icons.android}></span>
+                  Join Waitlist — Android Beta
+                </a>
+                <p class="mt-4 text-xs dark:text-white/30 text-dark-400 font-mono">Season 01 · June 2026</p>
+              </div>
+
+
+              <div class="text-center mt-6">
+                <button class="btn-secondary text-sm px-6 py-2.5">View Full Rankings →</button>
+              </div>
+            </div>
+
+            <!-- Right sidebar: Challenges -->
+            <div class="xl:col-span-1">
+              <h2 class="font-display font-bold text-2xl dark:text-white text-dark-950 mb-6">Active Challenges</h2>
+              <div class="space-y-4">
+                {activeChallenges.map((c) => (
+                  <div class="glass rounded-2xl p-4 hover:border-neon-blue/20 transition-all duration-300 group">
+                    <div class="flex items-start gap-3 mb-3">
+                      <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-none" style={`background: ${c.color}15; color: ${c.color};`}>
+                        <span class="w-4.5 h-4.5" set:html={icons[c.icon as keyof typeof icons]}></span>
+                      </div>
+                      <div>
+                        <div class="font-semibold text-sm dark:text-white text-dark-900">{c.name}</div>
+                        <div class="text-xs dark:text-white/40 text-dark-400">{c.desc}</div>
+                      </div>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs">
+                      <span class="text-neon-lime font-semibold">{c.reward}</span>
+                      <span class="dark:text-white/30 text-dark-400 font-mono">Season 01</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <!-- Join CTA -->
+              <div class="mt-6 glass rounded-2xl p-6 text-center">
+                <div class="w-12 h-12 rounded-2xl bg-neon-orange/15 flex items-center justify-center mx-auto mb-3">
+                  <span class="w-6 h-6 text-neon-orange" set:html={icons.trophy}></span>
+                </div>
+                <h3 class="font-display font-bold dark:text-white text-dark-950 mb-2">Join Season 01</h3>
+                <p class="text-xs dark:text-white/50 text-dark-500 mb-4 leading-relaxed">
+                  Android beta drops June 2026. Get on the waitlist and be the first to compete.
+                </p>
+                <a href="/download#waitlist" class="btn-primary text-sm px-4 py-2.5 justify-center w-full gap-2">
+                  <span class="w-4 h-4" set:html={icons.android}></span>
+                  Join Waitlist
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

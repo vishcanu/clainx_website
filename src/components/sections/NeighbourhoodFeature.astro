@@ -1,0 +1,173 @@
+---
+// Neighbourhood Feature — local store offers + treasure hunt mechanic
+import icons from '../../lib/icons';
+
+const mechanics = [
+  {
+    iconKey: 'store',
+    color: '#00FFE7',
+    title: 'Local Store Offers',
+    desc: 'Nearby businesses mark their zones. Claim their territory and unlock real discounts, freebies, and partner deals.',
+  },
+  {
+    iconKey: 'gem',
+    color: '#AAFF00',
+    title: 'Treasure Hunt Zones',
+    desc: "Hidden chests spawn inside unclaimed territory. Complete a zone to reveal what's hidden \u2014 XP, rare items, or merchant rewards.",
+  },
+  {
+    iconKey: 'ticket',
+    color: '#FF6B00',
+    title: 'Completion Rewards',
+    desc: 'Fully claim a district and trigger a completion event. Unlock exclusive bonuses from every business in that zone.',
+  },
+  {
+    iconKey: 'mapPin',
+    color: '#8B5CF6',
+    title: 'Partner Merchant Map',
+    desc: 'See participating businesses on your live map. The more you explore, the more deals appear in your neighbourhood.',
+  },
+];
+
+const exampleOffers = [
+  { store: 'Café', offer: '10% off on territory claim', icon: 'gift', color: '#00FFE7' },
+  { store: 'Gym', offer: 'Free day pass at 500 XP', icon: 'heart', color: '#FF0080' },
+  { store: 'Bookshop', offer: 'Rare badge + 20% off', icon: 'gem', color: '#AAFF00' },
+  { store: 'Bakery', offer: 'Free item on district complete', icon: 'star', color: '#FF6B00' },
+];
+---
+
+<section class="relative py-24 lg:py-32 overflow-hidden">
+  <div class="absolute inset-0 dark:bg-dark-950 bg-light-50"></div>
+  <div class="absolute inset-0 grid-overlay opacity-20"></div>
+  <div class="absolute top-1/2 left-0 w-[700px] h-[500px] bg-neon-cyan/5 rounded-full blur-[130px] -translate-y-1/2"></div>
+  <div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-neon-lime/5 rounded-full blur-[100px]"></div>
+
+  <div class="relative section-padding">
+    <div class="section-container">
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-24 items-center">
+
+        <!-- Left: content -->
+        <div class="reveal-left flex flex-col gap-8">
+
+          <div>
+            <span class="badge-blue mb-4 inline-block">Coming in Beta</span>
+            <h2 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl dark:text-white text-dark-950 leading-none tracking-tighter mb-6">
+              Your Neighbourhood<br/>
+              <span class="gradient-text-lime">Is the Treasure Map.</span>
+            </h2>
+            <p class="dark:text-white/60 text-dark-500 text-lg leading-relaxed max-w-lg">
+              Every territory you claim isn't just a game square — it's a real block in your city. Nearby businesses can list
+              offers that unlock when players claim their zone. The whole neighbourhood becomes a live, rewarded game.
+            </p>
+          </div>
+
+          <!-- Mechanics grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {mechanics.map((m) => (
+              <div class="card-glass group hover:border-neon-cyan/20 transition-all duration-300">
+                <div class="flex items-start gap-4">
+                  <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-none transition-transform duration-300 group-hover:scale-110"
+                       style={`background: ${m.color}15; color: ${m.color};`}>
+                    <span class="w-5 h-5" set:html={icons[m.iconKey as keyof typeof icons]}></span>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold dark:text-white text-dark-900 mb-1 text-sm">{m.title}</h4>
+                    <p class="dark:text-white/50 text-dark-500 text-xs leading-relaxed">{m.desc}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+
+        <!-- Right: visual mockup -->
+        <div class="reveal-right">
+          <div class="relative">
+
+            <!-- Outer glow -->
+            <div class="absolute inset-0 rounded-3xl border border-neon-cyan/15 animate-border-glow pointer-events-none z-20"></div>
+
+            <!-- Mock phone / map panel -->
+            <div class="glass rounded-3xl p-6 holographic relative overflow-hidden">
+
+              <!-- Sample label -->
+              <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-20">
+                <span class="badge-blue text-[10px] font-mono tracking-wider px-3 py-1">Concept UI</span>
+              </div>
+
+              <!-- Header -->
+              <div class="flex items-center justify-between mb-5 pt-3">
+                <div>
+                  <h4 class="font-display font-bold dark:text-white text-dark-900">Neighbourhood</h4>
+                  <p class="text-xs dark:text-white/40 text-dark-400 font-mono">4 offers nearby</p>
+                </div>
+                <div class="flex items-center gap-1.5 glass px-3 py-1.5 rounded-full">
+                  <span class="w-1.5 h-1.5 rounded-full bg-neon-lime animate-pulse"></span>
+                  <span class="text-xs font-mono text-neon-lime">Zone Active</span>
+                </div>
+              </div>
+
+              <!-- Map placeholder with hex overlay -->
+              <div class="relative rounded-2xl overflow-hidden mb-5" style="height: 180px; background: linear-gradient(135deg, rgba(0,212,255,0.06) 0%, rgba(0,255,231,0.04) 100%);">
+                <!-- Simulated hex grid -->
+                <svg class="absolute inset-0 w-full h-full opacity-40" viewBox="0 0 300 180">
+                  {[
+                    {x:30,y:30,fill:'#00D4FF'},{x:80,y:30,fill:'#00D4FF'},{x:130,y:30,fill:'#00FFE7'},
+                    {x:55,y:60,fill:'#FF6B00'},{x:105,y:60,fill:'#00D4FF'},{x:155,y:60,fill:'#00D4FF'},
+                    {x:30,y:90,fill:'rgba(0,0,0,0)'},{x:80,y:90,fill:'#AAFF00'},{x:130,y:90,fill:'#00D4FF'},
+                    {x:55,y:120,fill:'#8B5CF6'},{x:105,y:120,fill:'rgba(0,0,0,0)'},{x:155,y:120,fill:'#00D4FF'},
+                  ].map(h => (
+                    <polygon
+                      points={`${h.x},${h.y-14} ${h.x+12},${h.y-7} ${h.x+12},${h.y+7} ${h.x},${h.y+14} ${h.x-12},${h.y+7} ${h.x-12},${h.y-7}`}
+                      fill={`${h.fill}30`}
+                      stroke={h.fill === 'rgba(0,0,0,0)' ? 'rgba(255,255,255,0.08)' : h.fill}
+                      stroke-width="1"
+                    />
+                  ))}
+                </svg>
+
+                <!-- Map pin markers -->
+                <div class="absolute top-3 left-8 w-6 h-6 rounded-full bg-neon-cyan/80 flex items-center justify-center shadow-lg" style="box-shadow: 0 0 12px rgba(0,255,231,0.6);">
+                  <span class="w-3 h-3 text-dark-950" set:html={icons.store}></span>
+                </div>
+                <div class="absolute top-6 left-20 w-6 h-6 rounded-full bg-neon-orange/80 flex items-center justify-center shadow-lg" style="box-shadow: 0 0 12px rgba(255,107,0,0.6);">
+                  <span class="w-3 h-3 text-dark-950" set:html={icons.gift}></span>
+                </div>
+                <div class="absolute top-10 left-40 w-6 h-6 rounded-full bg-neon-lime/80 flex items-center justify-center shadow-lg" style="box-shadow: 0 0 12px rgba(170,255,0,0.6);">
+                  <span class="w-3 h-3 text-dark-950" set:html={icons.gem}></span>
+                </div>
+                <div class="absolute top-4 right-10 w-6 h-6 rounded-full bg-neon-purple/80 flex items-center justify-center shadow-lg" style="box-shadow: 0 0 12px rgba(139,92,246,0.6);">
+                  <span class="w-3 h-3 text-white" set:html={icons.ticket}></span>
+                </div>
+              </div>
+
+              <!-- Offers list -->
+              <div class="space-y-2.5">
+                {exampleOffers.map((offer) => (
+                  <div class="flex items-center justify-between glass rounded-xl px-3 py-2.5 hover:border-neon-cyan/20 transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                      <div class="w-7 h-7 rounded-lg flex items-center justify-center flex-none" style={`background: ${offer.color}15; color: ${offer.color};`}>
+                        <span class="w-3.5 h-3.5" set:html={icons[offer.icon as keyof typeof icons]}></span>
+                      </div>
+                      <div>
+                        <div class="text-xs font-semibold dark:text-white text-dark-900">{offer.store}</div>
+                        <div class="text-[10px] dark:text-white/40 text-dark-400">{offer.offer}</div>
+                      </div>
+                    </div>
+                    <div class="flex items-center gap-1">
+                      <span class="w-3 h-3 text-neon-lime" set:html={icons.zap}></span>
+                      <span class="text-[10px] font-mono text-neon-lime">Claim</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

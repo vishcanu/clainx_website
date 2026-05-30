@@ -1,0 +1,237 @@
+---
+// Navbar component - responsive, glass morphism, with theme toggle
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/features', label: 'Features' },
+  { href: '/arena', label: 'Arena' },
+  { href: '/about', label: 'About' },
+  { href: '/download', label: 'Download' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+  <div class="section-padding">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between h-[72px]">
+      
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2.5 group" aria-label="ClaimX Home">
+        <div class="relative w-9 h-9">
+          <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-neon-blue to-neon-cyan opacity-20 group-hover:opacity-40 transition-opacity duration-300 blur-sm"></div>
+          <div class="relative w-9 h-9 rounded-xl bg-dark-800 border border-neon-blue/20 flex items-center justify-center group-hover:border-neon-blue/50 transition-all duration-300">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L3 7v10l9 5 9-5V7L12 2Z" stroke="url(#logoGrad)" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M12 2v20M3 7l9 5 9-5" stroke="url(#logoGrad)" stroke-width="1.5"/>
+              <defs>
+                <linearGradient id="logoGrad" x1="3" y1="2" x2="21" y2="22" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#00D4FF"/>
+                  <stop offset="1" stop-color="#00FFE7"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+        <span class="font-display font-bold text-xl tracking-tight dark:text-white text-dark-900">
+          Claim<span class="gradient-text">X</span>
+        </span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <ul class="hidden md:flex items-center gap-1">
+        {navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 underline-glow ${
+                currentPath === link.href
+                  ? 'text-neon-blue bg-neon-blue/5'
+                  : 'dark:text-white/70 text-dark-600 hover:text-neon-blue dark:hover:text-neon-blue hover:bg-neon-blue/5'
+              }`}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <!-- Right actions -->
+      <div class="flex items-center gap-3">
+        <!-- Theme toggle -->
+        <button
+          id="theme-toggle"
+          class="w-9 h-9 rounded-lg glass flex items-center justify-center transition-all duration-300 hover:border-neon-blue/40 hover:shadow-glow-sm"
+          aria-label="Toggle theme"
+        >
+          <!-- Sun icon (shown in dark mode) -->
+          <svg class="dark:block hidden w-4 h-4 text-neon-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <!-- Moon icon (shown in light mode) -->
+          <svg class="dark:hidden block w-4 h-4 text-dark-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <!-- CTA -->
+        <a href="/download" class="hidden sm:inline-flex btn-primary text-sm px-5 py-2.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 14l-4-4h2.5V9h3v3H16z" stroke-width="0" fill="currentColor"/>
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Get App
+        </a>
+
+        <!-- Mobile menu toggle -->
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden w-9 h-9 rounded-lg glass flex items-center justify-center"
+          aria-label="Open menu"
+        >
+          <div class="flex flex-col gap-1.5">
+            <span class="mobile-line block w-5 h-0.5 bg-current rounded-full transition-all duration-300"></span>
+            <span class="mobile-line block w-5 h-0.5 bg-current rounded-full transition-all duration-300"></span>
+            <span class="mobile-line block w-3 h-0.5 bg-current rounded-full transition-all duration-300 ml-auto"></span>
+          </div>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Mobile menu drawer -->
+  <div
+    id="mobile-menu"
+    class="md:hidden fixed inset-0 z-40 opacity-0 pointer-events-none transition-all duration-400"
+    aria-hidden="true"
+  >
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-dark-950/90 backdrop-blur-xl dark:bg-dark-950/90 bg-white/90"></div>
+    <!-- Menu content -->
+    <div class="relative h-full flex flex-col pt-24 pb-10 px-6">
+      <ul class="flex flex-col gap-2">
+        {navLinks.map((link, i) => (
+          <li style={`--delay: ${i * 60}ms`} class="mobile-nav-item opacity-0 translate-x-4 transition-all duration-400">
+            <a
+              href={link.href}
+              class={`block px-4 py-4 rounded-xl text-2xl font-display font-bold tracking-tight transition-all duration-300 ${
+                currentPath === link.href
+                  ? 'text-neon-blue bg-neon-blue/5'
+                  : 'dark:text-white text-dark-900 hover:text-neon-blue hover:bg-neon-blue/5'
+              }`}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <div class="mt-8 flex flex-col gap-3">
+        <a href="/download" class="btn-primary justify-center text-base py-4">
+          Download App
+        </a>
+        <a href="/download#waitlist" class="btn-secondary justify-center text-base py-4">
+          Join Waitlist
+        </a>
+      </div>
+
+      <!-- Social links -->
+      <div class="mt-auto flex items-center gap-4 pt-8 border-t border-white/10">
+        <a href="#" class="text-white/40 hover:text-neon-blue transition-colors text-sm">Twitter</a>
+        <a href="#" class="text-white/40 hover:text-neon-blue transition-colors text-sm">Instagram</a>
+        <a href="#" class="text-white/40 hover:text-neon-blue transition-colors text-sm">Discord</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Spacer -->
+<div class="h-[72px]"></div>
+
+<script>
+  // =========================================================
+  // Navbar behavior
+  // =========================================================
+  const navbar = document.getElementById('navbar')!;
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn')!;
+  const mobileMenu = document.getElementById('mobile-menu')!;
+  const themeToggle = document.getElementById('theme-toggle')!;
+  
+  let menuOpen = false;
+  let lastScroll = 0;
+
+  // Scroll behavior - glass on scroll
+  const handleScroll = () => {
+    const scrollY = window.scrollY;
+    
+    if (scrollY > 20) {
+      navbar.classList.add('glass', 'border-b');
+      navbar.classList.add('dark:border-white/5', 'border-dark-900/10');
+    } else {
+      navbar.classList.remove('glass', 'border-b');
+      navbar.classList.remove('dark:border-white/5', 'border-dark-900/10');
+    }
+
+    // Hide on scroll down, show on scroll up
+    if (scrollY > lastScroll && scrollY > 200 && !menuOpen) {
+      navbar.style.transform = 'translateY(-100%)';
+    } else {
+      navbar.style.transform = 'translateY(0)';
+    }
+    lastScroll = scrollY;
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+
+  // Mobile menu toggle
+  const openMenu = () => {
+    menuOpen = true;
+    mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+    mobileMenu.classList.add('opacity-100');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    
+    // Animate items in
+    setTimeout(() => {
+      document.querySelectorAll('.mobile-nav-item').forEach((item, i) => {
+        setTimeout(() => {
+          item.classList.remove('opacity-0', 'translate-x-4');
+        }, i * 60);
+      });
+    }, 50);
+  };
+
+  const closeMenu = () => {
+    menuOpen = false;
+    mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+    mobileMenu.classList.remove('opacity-100');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    
+    document.querySelectorAll('.mobile-nav-item').forEach((item) => {
+      item.classList.add('opacity-0', 'translate-x-4');
+    });
+  };
+
+  mobileMenuBtn.addEventListener('click', () => {
+    menuOpen ? closeMenu() : openMenu();
+  });
+
+  // Close menu on link click
+  mobileMenu.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Close on escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menuOpen) closeMenu();
+  });
+
+  // Theme toggle
+  themeToggle.addEventListener('click', () => {
+    const html = document.documentElement;
+    const isDark = html.classList.contains('dark');
+    html.classList.toggle('dark', !isDark);
+    html.classList.toggle('light', isDark);
+    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+  });
+</script>
