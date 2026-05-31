@@ -4,7 +4,7 @@
 // =========================================================
 
 const svg = (path: string, extra = '') =>
-  `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" ${extra}>${path}</svg>`;
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:100%;display:block;" ${extra}>${path}</svg>`;
 
 export const icons: Record<string, string> = {
   // Activities
@@ -55,11 +55,18 @@ export const icons: Record<string, string> = {
   checkCircle:svg('<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>'),
   download:  svg('<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>'),
   android:   svg('<path d="M5 16.5c0 .83.67 1.5 1.5 1.5h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V18h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V18h1c.83 0 1.5-.67 1.5-1.5v-9H5v9z"/><path d="M3 7.5C3 6.67 3.67 6 4.5 6s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S3 13.33 3 12.5v-5z"/><path d="M20.5 6c-.83 0-1.5.67-1.5 1.5v5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-5c0-.83-.67-1.5-1.5-1.5z"/><path d="M15.53 2.16l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.42 1.42A5.95 5.95 0 0 0 12 1c-.96 0-1.86.23-2.66.63L7.88.21c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31A5.956 5.956 0 0 0 6 7h12c0-1.91-.76-3.64-1.99-4.9h.02z"/><circle cx="9" cy="5" r=".75" fill="currentColor" stroke="none"/><circle cx="15" cy="5" r=".75" fill="currentColor" stroke="none"/>'),
+  clock:     svg('<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'),
   arrowRight:svg('<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>'),
   globe:     svg('<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>'),
   radar:     svg('<path d="M19.07 4.93A10 10 0 0 1 21 12"/><path d="M15.54 8.46a5 5 0 0 1 1.35 3.91 5 5 0 0 1-2.43 3.78"/><circle cx="12" cy="12" r="2"/><path d="M4.93 19.07A10 10 0 0 1 2 12"/><path d="M7.05 16.95a5 5 0 0 1 .9-7.64"/>'),
   layers:    svg('<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>'),
   info:      svg('<circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>'),
+
+  // Brand / Social
+  instagram: svg('<rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>'),
+  linkedin:  svg('<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>'),
+  facebook:  svg('<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>'),
+  youtube:   svg('<path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>'),
 };
 
 export default icons;

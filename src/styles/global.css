@@ -207,49 +207,51 @@
 
     /* Buttons */
     .btn-primary {
-        @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-dark-950 transition-all duration-300;
-        background: linear-gradient(135deg, #00D4FF, #00FFE7);
-        box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
-        color: #020408;
+        @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-300;
+        background: linear-gradient(135deg, #DDD6FE 0%, #C4B5FD 100%);
+        box-shadow: 0 2px 20px rgba(196, 181, 253, 0.22), 0 4px 16px rgba(0, 0, 0, 0.22);
+        color: #1e1b4b;
     }
 
     .btn-primary:hover {
         transform: translateY(-2px) scale(1.02);
-        box-shadow: 0 0 40px rgba(0, 212, 255, 0.6), 0 8px 30px rgba(0, 0, 0, 0.3);
-        color: #020408;
+        background: linear-gradient(135deg, #EDE9FE 0%, #DDD6FE 100%);
+        box-shadow: 0 4px 32px rgba(196, 181, 253, 0.38), 0 8px 28px rgba(0, 0, 0, 0.28);
+        color: #1e1b4b;
     }
 
     .btn-primary:active {
         transform: translateY(0) scale(0.98);
-        color: #020408;
+        color: #1e1b4b;
     }
 
     .btn-secondary {
         @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-300;
-        background: transparent;
-        border: 1px solid rgba(0, 212, 255, 0.4);
-        color: #00D4FF;
+        background: rgba(139, 92, 246, 0.07);
+        border: 1px solid rgba(139, 92, 246, 0.28);
+        color: #8B5CF6;
     }
 
     .btn-secondary:hover {
-        background: rgba(0, 212, 255, 0.1);
-        border-color: rgba(0, 212, 255, 0.8);
-        box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+        background: rgba(139, 92, 246, 0.13);
+        border-color: rgba(139, 92, 246, 0.5);
+        box-shadow: 0 4px 20px rgba(139, 92, 246, 0.14), 0 4px 16px rgba(0, 0, 0, 0.18);
         transform: translateY(-1px);
-        color: #00D4FF;
+        color: #7C3AED;
     }
 
     .btn-fire {
-        @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white transition-all duration-300;
-        background: linear-gradient(135deg, #FF6B00, #FF0080);
-        box-shadow: 0 0 20px rgba(255, 107, 0, 0.4);
-        color: #ffffff;
+        @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-300;
+        background: linear-gradient(135deg, #FED7AA 0%, #FCA5A5 100%);
+        box-shadow: 0 2px 20px rgba(252, 165, 165, 0.22), 0 4px 16px rgba(0, 0, 0, 0.22);
+        color: #431407;
     }
 
     .btn-fire:hover {
         transform: translateY(-2px) scale(1.02);
-        box-shadow: 0 0 40px rgba(255, 107, 0, 0.6);
-        color: #ffffff;
+        background: linear-gradient(135deg, #FFEDD5 0%, #FED7AA 100%);
+        box-shadow: 0 4px 32px rgba(252, 165, 165, 0.38), 0 8px 28px rgba(0, 0, 0, 0.28);
+        color: #431407;
     }
 
     /* Section padding */

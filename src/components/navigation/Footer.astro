@@ -1,4 +1,6 @@
 ---
+import icons from '../../lib/icons';
+
 const footerLinks = {
   product: [
     { label: 'Features', href: '/features' },
@@ -20,10 +22,10 @@ const footerLinks = {
 };
 
 const socials = [
-  { label: 'Twitter/X', href: 'https://twitter.com/claimxapp', icon: 'X' },
-  { label: 'Instagram', href: 'https://instagram.com/claimxapp', icon: 'IG' },
-  { label: 'Discord', href: 'https://discord.gg/claimx', icon: 'DC' },
-  { label: 'TikTok', href: 'https://tiktok.com/@claimxapp', icon: 'TT' },
+  { label: 'Instagram', href: 'https://instagram.com/claimxapp',  iconKey: 'instagram', color: '#E1306C' },
+  { label: 'LinkedIn',  href: 'https://linkedin.com/company/claimx', iconKey: 'linkedin',  color: '#0A66C2' },
+  { label: 'Facebook',  href: 'https://facebook.com/claimxapp',  iconKey: 'facebook',  color: '#1877F2' },
+  { label: 'YouTube',   href: 'https://youtube.com/@claimxapp',  iconKey: 'youtube',   color: '#FF0000' },
 ];
 ---
 
@@ -72,9 +74,13 @@ const socials = [
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.label}
-                class="w-9 h-9 rounded-lg glass flex items-center justify-center text-xs font-bold dark:text-white/50 text-dark-500 hover:text-neon-blue hover:border-neon-blue/30 transition-all duration-300"
+                class="w-9 h-9 rounded-lg glass flex items-center justify-center dark:text-white/50 text-dark-500 hover:border-white/20 transition-all duration-300 group"
+                style={`--social-color: ${social.color};`}
               >
-                {social.icon}
+                <span
+                  class="w-4 h-4 block transition-colors duration-300 group-hover:[color:var(--social-color)]"
+                  set:html={icons[social.iconKey as keyof typeof icons]}
+                ></span>
               </a>
             ))}
           </div>
@@ -82,9 +88,7 @@ const socials = [
           <!-- App store -->
           <div class="flex items-center gap-3 mt-6">
             <a href="/download" class="flex items-center gap-2 px-4 py-2 rounded-xl dark:bg-white/5 bg-dark-900/5 border dark:border-white/10 border-dark-900/10 hover:border-neon-blue/30 transition-all duration-300 group">
-              <svg class="w-5 h-5 dark:text-white/70 group-hover:text-neon-blue transition-colors" viewBox="0 0 24 24" fill="currentColor">
-                <path d="m3.18 23.76 9.19-9.19-2.17-2.17-7.02 11.36zm14.64-14.64L3.93 1.48A2 2 0 0 0 2 3.3v17.4a2 2 0 0 0 1.93 1.82l13.89-13.4zm-6.56 5.44-7.29 7.29L16.2 14.4l-4.94-4.84zm6.53-6.09-3.98 3.97 3.98 3.98a2 2 0 0 0 0-7.95z"/>
-              </svg>
+              <span class="w-5 h-5 block dark:text-white/70 group-hover:text-neon-blue transition-colors" set:html={icons.android}></span>
               <div>
                 <div class="text-[9px] dark:text-white/40 text-dark-400 leading-none">Get it on</div>
                 <div class="text-xs font-semibold dark:text-white text-dark-900 leading-none mt-0.5">Google Play</div>

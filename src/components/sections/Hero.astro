@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 ---
 
-<section id="hero" class="relative min-h-screen flex items-center overflow-hidden dark:bg-dark-950 bg-light-50">
+<section id="hero" class="relative min-h-screen flex items-start overflow-hidden dark:bg-dark-950 bg-light-50">
 
   <!-- Background layers -->
   <div class="absolute inset-0 pointer-events-none">
@@ -18,7 +18,7 @@ import {
 
   <div class="relative z-10 section-padding w-full">
     <div class="section-container">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-20 items-center min-h-[calc(100vh-72px)] py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-20 items-center pt-[22px] pb-8">
 
         <!-- â”€â”€ Left: Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
         <div class="flex flex-col gap-6 lg:gap-7">
@@ -102,68 +102,18 @@ import {
             <!-- Map container -->
             <div class="relative rounded-2xl lg:rounded-3xl overflow-hidden border border-neon-blue/10 shadow-glass" style="aspect-ratio: 1;">
 
-              <!-- MapLibre canvas replaced with Bangalore SVG -->
-              <svg id="blr-map-svg" class="absolute inset-0 w-full h-full" viewBox="0 0 480 480"
-                xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                <defs>
-                  <filter id="glow-soft">
-                    <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
-                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                  </filter>
-                  <filter id="glow-route">
-                    <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>
-                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                  </filter>
-                  <pattern id="map-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#00D4FF" stroke-width="0.3" stroke-opacity="0.12"/>
-                  </pattern>
-                  <radialGradient id="center-glow" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stop-color="#00D4FF" stop-opacity="0.07"/>
-                    <stop offset="100%" stop-color="#00D4FF" stop-opacity="0"/>
-                  </radialGradient>
-                </defs>
-                <rect width="480" height="480" fill="#07101e"/>
-                <rect width="480" height="480" fill="url(#map-grid)"/>
-                <rect width="480" height="480" fill="url(#center-glow)"/>
-                <path d="M 98 82 L 155 48 L 230 38 L 310 52 L 375 88 L 418 150 L 432 228 L 425 318 L 395 390 L 330 435 L 240 448 L 152 440 L 88 396 L 55 312 L 50 215 L 68 138 Z"
-                  fill="rgba(0,212,255,0.035)" stroke="#00D4FF" stroke-width="1.2" stroke-opacity="0.25"
-                  stroke-dasharray="5 4" filter="url(#glow-soft)"/>
-                <ellipse cx="240" cy="240" rx="175" ry="160" fill="none" stroke="rgba(148,163,184,0.18)" stroke-width="2"/>
-                <ellipse cx="240" cy="240" rx="88" ry="80" fill="none" stroke="rgba(148,163,184,0.14)" stroke-width="1.5"/>
-                <line x1="240" y1="240" x2="240" y2="52" stroke="rgba(148,163,184,0.2)" stroke-width="1.5"/>
-                <line x1="240" y1="240" x2="418" y2="148" stroke="rgba(148,163,184,0.2)" stroke-width="1.5"/>
-                <line x1="240" y1="240" x2="422" y2="332" stroke="rgba(148,163,184,0.2)" stroke-width="1.5"/>
-                <line x1="240" y1="240" x2="240" y2="430" stroke="rgba(148,163,184,0.2)" stroke-width="1.5"/>
-                <line x1="240" y1="240" x2="58" y2="332" stroke="rgba(148,163,184,0.2)" stroke-width="1.5"/>
-                <line x1="240" y1="240" x2="62" y2="148" stroke="rgba(148,163,184,0.2)" stroke-width="1.5"/>
-                <line x1="80" y1="130" x2="400" y2="130" stroke="rgba(148,163,184,0.09)" stroke-width="1"/>
-                <line x1="80" y1="360" x2="400" y2="360" stroke="rgba(148,163,184,0.09)" stroke-width="1"/>
-                <line x1="130" y1="75" x2="130" y2="405" stroke="rgba(148,163,184,0.09)" stroke-width="1"/>
-                <line x1="355" y1="75" x2="355" y2="405" stroke="rgba(148,163,184,0.09)" stroke-width="1"/>
-                <g id="hex-territories"></g>
-                <polyline points="148,315 172,278 208,258 240,240 278,224 315,212 348,198"
-                  fill="none" stroke="#00D4FF" stroke-width="2.5" stroke-dasharray="6 3"
-                  stroke-opacity="0.9" filter="url(#glow-route)"/>
-                <circle cx="348" cy="198" r="5" fill="#00D4FF" filter="url(#glow-soft)">
-                  <animate attributeName="r" values="5;8;5" dur="2s" repeatCount="indefinite"/>
-                  <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite"/>
-                </circle>
-                <circle cx="348" cy="198" r="10" fill="none" stroke="#00D4FF" stroke-width="1" stroke-opacity="0.4">
-                  <animate attributeName="r" values="8;20;8" dur="2s" repeatCount="indefinite"/>
-                  <animate attributeName="opacity" values="0.5;0;0.5" dur="2s" repeatCount="indefinite"/>
-                </circle>
-                <circle cx="355" cy="330" r="4" fill="#FF6B00" filter="url(#glow-soft)">
-                  <animate attributeName="r" values="4;7;4" dur="3s" repeatCount="indefinite"/>
-                  <animate attributeName="opacity" values="1;0.4;1" dur="3s" repeatCount="indefinite"/>
-                </circle>
-                <text x="240" y="228" text-anchor="middle" fill="#E2E8F0" font-size="8.5" font-family="JetBrains Mono,monospace" opacity="0.75" font-weight="600">MG ROAD</text>
-                <text x="318" y="295" text-anchor="middle" fill="#94A3B8" font-size="7" font-family="JetBrains Mono,monospace" opacity="0.6">KORAMANGALA</text>
-                <text x="325" y="190" text-anchor="middle" fill="#94A3B8" font-size="7" font-family="JetBrains Mono,monospace" opacity="0.6">INDIRANAGAR</text>
-                <text x="158" y="168" text-anchor="middle" fill="#94A3B8" font-size="7" font-family="JetBrains Mono,monospace" opacity="0.55">MALLESHWARAM</text>
-                <text x="162" y="335" text-anchor="middle" fill="#94A3B8" font-size="7" font-family="JetBrains Mono,monospace" opacity="0.55">JP NAGAR</text>
-                <text x="398" y="215" text-anchor="middle" fill="#94A3B8" font-size="7" font-family="JetBrains Mono,monospace" opacity="0.45">WHITEFIELD</text>
-                <text x="240" y="98" text-anchor="middle" fill="#94A3B8" font-size="7" font-family="JetBrains Mono,monospace" opacity="0.45">HEBBAL</text>
-              </svg>
+              <!-- Real map screenshot — dark theme -->
+              <img
+                src="/Screenshot 2026-05-31 134050.png"
+                alt="ClaimX live city map"
+                class="absolute inset-0 w-full h-full object-cover dark:block hidden"
+              />
+              <!-- Real map screenshot — light theme -->
+              <img
+                src="/lighttheme.png"
+                alt="ClaimX live city map"
+                class="absolute inset-0 w-full h-full object-cover dark:hidden block"
+              />
 
               <!-- Top-left: LIVE indicator -->
               <div class="absolute top-4 left-4 z-10 glass px-3 py-1.5 rounded-full flex items-center gap-2">

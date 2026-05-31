@@ -5,6 +5,7 @@ import Footer from '../components/navigation/Footer.astro';
 import { features } from '../data/features';
 import { tiers } from '../data/tiers';
 import { sieges } from '../data/sieges';
+import { icons } from '../lib/icons';
 
 const sections = [
   { id: 'territory', label: 'Territory' },
@@ -16,12 +17,12 @@ const sections = [
 ];
 
 const arenaFeatures = [
-  { icon: '🏆', title: 'Season Rankings', desc: 'Weekly and monthly leaderboards across your city, region, and globally.' },
-  { icon: '⚔️', title: 'Rival System', desc: 'Automatically matched with rivals at your tier for persistent territory wars.' },
-  { icon: '🤝', title: 'Alliance Battles', desc: 'Team up with up to 5 players for coordinated district conquest.' },
-  { icon: '🎯', title: 'Daily Missions', desc: 'Fresh objectives every day: capture zones, run routes, reach steps goals.' },
-  { icon: '💰', title: 'Prize Pools', desc: 'Seasonal tournaments with real rewards for top arena performers.' },
-  { icon: '👻', title: 'Ghost Challenges', desc: 'Race your past performance as a ghost overlay on the live map.' },
+  { icon: 'trophy',  title: 'Season Rankings',  desc: 'Weekly and monthly leaderboards across your city, region, and globally.' },
+  { icon: 'swords',  title: 'Rival System',      desc: 'Automatically matched with rivals at your tier for persistent territory wars.' },
+  { icon: 'users',   title: 'Alliance Battles',  desc: 'Team up with up to 5 players for coordinated district conquest.' },
+  { icon: 'target',  title: 'Daily Missions',    desc: 'Fresh objectives every day: capture zones, run routes, reach steps goals.' },
+  { icon: 'gift',    title: 'Prize Pools',        desc: 'Seasonal tournaments with real rewards for top arena performers.' },
+  { icon: 'ghost',   title: 'Ghost Challenges',  desc: 'Race your past performance as a ghost overlay on the live map.' },
 ];
 ---
 
@@ -32,7 +33,7 @@ const arenaFeatures = [
   <Navbar />
   <main>
     <!-- Hero -->
-    <section class="relative py-24 lg:py-32 overflow-hidden">
+    <section class="relative pt-[22px] pb-8 overflow-hidden">
       <div class="absolute inset-0 dark:bg-dark-950 bg-light-50"></div>
       <div class="absolute inset-0 grid-overlay opacity-30"></div>
       <div class="absolute top-1/2 left-1/4 w-[600px] h-[400px] bg-neon-blue/6 rounded-full blur-[120px] -translate-y-1/2"></div>
@@ -72,13 +73,13 @@ const arenaFeatures = [
             <div class="reveal-left">
               <span class="badge-blue mb-4 inline-block">Territory System</span>
               <h2 class="font-display font-black text-4xl sm:text-5xl dark:text-white text-dark-950 mt-4 mb-6 leading-tight">
-                The Map Is<br/><span class="gradient-text">The Game Board.</span>
+                Your Route.<br/><span class="gradient-text">Your Territory.</span>
               </h2>
               <p class="dark:text-white/60 text-dark-500 leading-relaxed mb-6">
-                Your city is divided into a hexagonal grid. Every hex can be owned. When you physically move through a hex — on foot or bike — it becomes yours. It's that simple, and that deep.
+                Claim territory by physically moving through your city on foot, by run, or on bike. Trace a <strong class="dark:text-white text-dark-900">closed loop</strong> back to your start point to claim a zone, or draw a <strong class="dark:text-white text-dark-900">corridor</strong> between two distinct points to own a strip of real-world turf. Your path is your territory.
               </p>
               <ul class="space-y-3">
-                {['GPS-based real-time claiming', 'Hexagonal zone grid overlay', 'Color-coded player territories', 'Multi-player overlap rules', 'Distance-weighted claim power', 'Offline sync support'].map((item) => (
+                {['GPS-traced route claiming', 'Closed loop (circle) territory', 'Open corridor (A→B) claiming', 'Walk, run, or cycle to claim', 'Color-coded player territories', 'Offline sync support'].map((item) => (
                   <li class="flex items-center gap-3 text-sm dark:text-white/70 text-dark-600">
                     <div class="w-1.5 h-1.5 rounded-full bg-neon-blue flex-none"></div>
                     {item}
@@ -87,67 +88,18 @@ const arenaFeatures = [
               </ul>
             </div>
             <div class="reveal-right">
-              <!-- Hex grid diagram -->
-              <div class="glass rounded-3xl p-6 relative overflow-hidden">
-                <svg viewBox="0 0 400 350" class="w-full h-full" fill="none">
-                  <!-- Hexagonal grid visualization -->
-                  {[
-                    { cx: 70, cy: 80, owned: true, player: true },
-                    { cx: 130, cy: 80, owned: true, player: true },
-                    { cx: 190, cy: 80, owned: false },
-                    { cx: 250, cy: 80, owned: true, rival: true },
-                    { cx: 310, cy: 80, owned: true, rival: true },
-                    { cx: 100, cy: 135, owned: true, player: true },
-                    { cx: 160, cy: 135, owned: true, player: true },
-                    { cx: 220, cy: 135, owned: true, rival: true },
-                    { cx: 280, cy: 135, owned: false },
-                    { cx: 70, cy: 190, owned: true, player: true },
-                    { cx: 130, cy: 190, owned: true, player: true },
-                    { cx: 190, cy: 190, owned: false },
-                    { cx: 250, cy: 190, owned: true, rival: true },
-                    { cx: 100, cy: 245, owned: false },
-                    { cx: 160, cy: 245, owned: true, player: true },
-                    { cx: 220, cy: 245, owned: false },
-                    { cx: 280, cy: 245, owned: true, rival: true },
-                  ].map((hex, i) => {
-                    const size = 35;
-                    const points = Array.from({ length: 6 }, (_, j) => {
-                      const angle = (Math.PI / 3) * j - Math.PI / 6;
-                      return `${hex.cx + size * Math.cos(angle)},${hex.cy + size * Math.sin(angle)}`;
-                    }).join(' ');
-                    const fill = hex.player ? 'rgba(0,212,255,0.25)' : hex.rival ? 'rgba(255,107,0,0.25)' : 'rgba(255,255,255,0.03)';
-                    const stroke = hex.player ? '#00D4FF' : hex.rival ? '#FF6B00' : 'rgba(255,255,255,0.1)';
-                    return (
-                      <polygon
-                        key={i}
-                        points={points}
-                        fill={fill}
-                        stroke={stroke}
-                        stroke-width="1"
-                      />
-                    );
-                  })}
-
-                  <!-- GPS path -->
-                  <path d="M70 80 L130 80 L160 135 L130 190 L160 245" stroke="#00D4FF" stroke-width="2" stroke-dasharray="5 3" opacity="0.7">
-                    <animate attributeName="stroke-dashoffset" values="0;-80" dur="2s" repeatCount="indefinite"/>
-                  </path>
-
-                  <!-- Runner dot -->
-                  <circle cx="160" cy="245" r="5" fill="#00D4FF">
-                    <animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite"/>
-                  </circle>
-                  <circle cx="160" cy="245" r="12" fill="rgba(0,212,255,0.2)">
-                    <animate attributeName="r" values="8;16;8" dur="1.5s" repeatCount="indefinite"/>
-                    <animate attributeName="opacity" values="0.4;0;0.4" dur="1.5s" repeatCount="indefinite"/>
-                  </circle>
-
-                  <!-- Legend -->
-                  <rect x="10" y="300" width="12" height="12" rx="2" fill="rgba(0,212,255,0.3)" stroke="#00D4FF" stroke-width="1"/>
-                  <text x="27" y="311" fill="rgba(255,255,255,0.5)" font-size="11">Your Territory</text>
-                  <rect x="150" y="300" width="12" height="12" rx="2" fill="rgba(255,107,0,0.3)" stroke="#FF6B00" stroke-width="1"/>
-                  <text x="167" y="311" fill="rgba(255,255,255,0.5)" font-size="11">Rival Territory</text>
-                </svg>
+              <!-- Map screenshot -->
+              <div class="rounded-3xl overflow-hidden relative border border-neon-blue/10 shadow-glass">
+                <img
+                  src="/Screenshot 2026-05-31 134050.png"
+                  alt="ClaimX territory map"
+                  class="w-full h-full object-cover dark:block hidden"
+                />
+                <img
+                  src="/lighttheme.png"
+                  alt="ClaimX territory map"
+                  class="w-full h-full object-cover dark:hidden block"
+                />
               </div>
             </div>
           </div>
@@ -201,13 +153,13 @@ const arenaFeatures = [
             <div class="reveal-right order-1 lg:order-2">
               <span class="badge-purple mb-4 inline-block">3D Building System</span>
               <h2 class="font-display font-black text-4xl sm:text-5xl dark:text-white text-dark-950 mt-4 mb-6 leading-tight">
-                Your Territory<br/><span class="gradient-text">Grows Upward.</span>
+                Every Lap<br/><span class="gradient-text">Builds Higher.</span>
               </h2>
               <p class="dark:text-white/60 text-dark-500 leading-relaxed mb-6">
-                The longer you hold a territory, the taller the 3D tower that grows from it. Your building height is your legacy — visible to every rival who passes through.
+                Each time you walk, run, or cycle through the same territory, your structure levels up. First pass raises a <strong class="dark:text-white text-dark-900">Bronze</strong> wall. Second pass grows it taller in <strong class="dark:text-white text-dark-900">Silver</strong>. Third pass crowns the walls in <strong class="dark:text-white text-dark-900">Gold</strong>. Keep going and you start raising full <strong class="dark:text-white text-dark-900">skyscrapers</strong> — your presence made permanent in the cityscape.
               </p>
               <ul class="space-y-3">
-                {['5-tier height progression', 'Real-time 3D rendering on map', 'Crowns at GOATED+ tier', 'Building resets on zone loss', 'District landmark status at max height', 'Visual territory war indicator'].map((item) => (
+                {['1st pass — Bronze walls raised', '2nd pass — Walls grow & turn Silver', '3rd pass — Gold-capped walls', '4th+ pass — Skyscrapers & buildings', 'Visible to all rivals on the map', 'Structure resets if territory is lost'].map((item) => (
                   <li class="flex items-center gap-3 text-sm dark:text-white/70 text-dark-600">
                     <div class="w-1.5 h-1.5 rounded-full bg-neon-purple flex-none"></div>
                     {item}
@@ -234,7 +186,9 @@ const arenaFeatures = [
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 stagger-children reveal">
             {arenaFeatures.map((f, i) => (
               <div class="card-glass group" style={`transition-delay: ${i * 0.1}s;`}>
-                <div class="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">{f.icon}</div>
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-3 text-neon-orange group-hover:scale-110 transition-transform duration-300" style="background: rgba(255,107,0,0.1);">
+                  <span class="w-5 h-5 block" set:html={icons[f.icon]} />
+                </div>
                 <h3 class="font-display font-bold text-lg dark:text-white text-dark-950 mb-2">{f.title}</h3>
                 <p class="dark:text-white/50 text-dark-500 text-sm leading-relaxed">{f.desc}</p>
               </div>
@@ -262,10 +216,10 @@ const arenaFeatures = [
                 style={`transition-delay: ${i * 0.05}s; border-color: ${feature.color}15;`}
               >
                 <div
-                  class="w-10 h-10 rounded-xl flex items-center justify-center mb-3 text-xl group-hover:scale-110 transition-transform duration-300"
-                  style={`background: ${feature.color}15;`}
+                  class="w-10 h-10 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300"
+                  style={`background: ${feature.color}15; color: ${feature.color};`}
                 >
-                  {feature.icon === 'Map' ? '🗺️' : feature.icon === 'Building2' ? '🏙️' : feature.icon === 'Swords' ? '⚔️' : feature.icon === 'Heart' ? '❤️' : feature.icon === 'Trees' ? '🌳' : feature.icon === 'Users' ? '👥' : feature.icon === 'Trophy' ? '🏆' : '👻'}
+                  <span class="w-5 h-5 block" set:html={icons[feature.icon.toLowerCase()] ?? icons.ghost} />
                 </div>
                 <span class="inline-block text-[10px] font-bold tracking-widest px-2 py-0.5 rounded-full mb-2" style={`background: ${feature.color}12; color: ${feature.color};`}>{feature.tag}</span>
                 <h3 class="font-display font-bold text-base dark:text-white text-dark-950 mb-2">{feature.title}</h3>
